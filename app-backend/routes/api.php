@@ -17,10 +17,16 @@ use Illuminate\Http\Request;
 Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
 Route::group(['middleware' => 'auth:api'], function(){
+	//User
 	Route::post('details','UserController@details');
+	Route::put('update/{user_id}', 'UserController@update');
+
+	Route::post('post/{user_id}/create', 'PostController@create');
 });
 
-
+	//Posts
+	
+	Route::get('posts', 'PostController@index');
 
 
 //Nope
@@ -30,8 +36,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 
 //Posts
-Route::get('posts', 'PostController@index');
 Route::get('posts/{id}', 'PostController@show'); 
-Route::post('posts/add', 'PostController@store');
 Route::put('posts/{id}', 'PostController@update');
 Route::delete('posts/{id}', 'PostController@delete');

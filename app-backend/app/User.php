@@ -13,17 +13,24 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    protected $fillable = [
-        'name', 'last_name', 'email', 'password', 'country', 'province', 'city', 'zip_code', 'phone', 'address', 'birthday'
-    ];
+    // protected $fillable = [
+    //     'name', 'last_name', 'email', 'password', 'country', 'province', 'city', 'zip_code', 'phone', 'address', 'birthday', 'gender',
+    // ];
+
+    protected $guarded = [];
 
     protected $hidden = [
         'password', 'remember_token', 'active', 'api_token',
     ];
 
     protected $attributes = [
+        'avatar' => 'user.jpg',
         'active' => 1,
     ];
+
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
 
 /*    public function details(){
         return $this->em

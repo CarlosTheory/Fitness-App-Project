@@ -13,4 +13,8 @@ class Category extends Model
     protected $attributes = [
     	'active' = 1,
     ];
+
+    public function post_category(){
+    	return $this->hasMany('App\Post')
+    }
 }
