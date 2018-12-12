@@ -12,13 +12,7 @@ class PostController extends Controller
         $posts = Post::with('user:id,name,last_name')->get();
 
         return $posts;
-        // $posts = Post::all();
 
-        // $posts->each(function($post) foreach($posts as $post){
-        //     return response->json(['post' => $post]);
-        // });
-
-    	//return Post::all();
     }
 
     public function show($id){
