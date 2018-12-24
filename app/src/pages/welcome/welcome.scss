@@ -1,0 +1,40 @@
+page-welcome {
+	#slideOne {
+		background-image: url(../assets/imgs/welcome1.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+	}
+
+	#slideTwo {
+		background-image: url(../assets/imgs/welcome2.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+	}
+
+	#slideThree {
+		background-image: url(../assets/imgs/exercise-exercise-ball-fitness-1430819.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center left;
+
+	}
+
+	.message{
+		width: 100%;
+		//border-radius: 50px 50px 50px 50px;
+		background-color: rgba(0,0,0,0.6);
+		margin-top: 30%;
+		margin-bottom: 35%;
+	}
+
+	.message h2{
+		color:white;
+	}
+
+	.message p{
+		color:white;
+	}
+
+}
