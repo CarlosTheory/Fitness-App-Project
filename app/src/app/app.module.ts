@@ -11,6 +11,10 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { GeoProvider } from '../providers/geo/geo';
+
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -22,8 +26,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignUpPage,
   ],
   imports: [
+
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,7 +43,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GeoProvider
   ]
 })
 export class AppModule {}

@@ -13,68 +13,78 @@
 </ion-header>
 
 
-<ion-content padding class="bodyApp">
+<ion-content>
 	<ion-list>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Nombre</ion-label>
+	  <ion-item>
+	    <ion-label fixed>Nombre</ion-label>
 	    <ion-input type="text"></ion-input>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Apellido</ion-label>
+	  <ion-item>
+	    <ion-label fixed>Apellido</ion-label>
 	    <ion-input type="text"></ion-input>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Correo</ion-label>
+	  <ion-item>
+	    <ion-label fixed>Correo</ion-label>
 	    <ion-input type="email"></ion-input>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Clave</ion-label>
+	  <ion-item>
+	    <ion-label fixed>Clave</ion-label>
 	    <ion-input type="password"></ion-input>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Verificar Clave</ion-label>
+	  <ion-item>
+	    <ion-label fixed>Verificar Clave</ion-label>
 	    <ion-input type="password"></ion-input>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Estado</ion-label>
+		<ion-item>
+		  <ion-label>Estado</ion-label>
+		  <ion-select [(ngModel)]="dataSelected.province" interface="popover">
+		    <ion-option *ngFor="let province of provinces; let i = index" (ionSelect)="passProvince(i)">
+		    	{{ province.estado }}
+		    </ion-option>
+		  </ion-select>
+		</ion-item>
+
+	  <ion-item>
+	    <ion-label fixed>Ciudad</ion-label>
 	    <ion-input type="text"></ion-input>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Ciudad</ion-label>
+	  <ion-item>
+	    <ion-label fixed>Codigo Postal</ion-label>
 	    <ion-input type="text"></ion-input>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Codigo Postal</ion-label>
+	  <ion-item>
+	    <ion-label fixed>Teléfono</ion-label>
 	    <ion-input type="text"></ion-input>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Teléfono</ion-label>
+	  <ion-item>
+	    <ion-label fixed>Dirección</ion-label>
 	    <ion-input type="text"></ion-input>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Dirección</ion-label>
-	    <ion-input type="text"></ion-input>
+	  <ion-item>
+	  	  <ion-label fixed>Fecha de Nacimiento</ion-label>
+		  <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Fecha de Nacimiento</ion-label>
-	    <ion-input type="text"></ion-input>
+
+	  <ion-item>
+		  <ion-label fixed>Genero</ion-label>
+			  <ion-select [(ngModel)]="gender">
+			    <ion-option value="f">Femenino</ion-option>
+			    <ion-option value="m">Masculino</ion-option>
+			    <ion-option value="o">Otro</ion-option>
+			  </ion-select>
 	  </ion-item>
 
-	  <ion-item class="bodyAppItem">
-	    <ion-label floating>Género</ion-label>
-	    <ion-input type="text"></ion-input>
-	  </ion-item>
 
 	</ion-list>
 </ion-content>

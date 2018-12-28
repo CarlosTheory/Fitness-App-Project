@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { GeoProvider } from '../../providers/geo/geo';
+
 /**
  * Generated class for the SignUpPage page.
  *
@@ -15,7 +17,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SignUpPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public provinces: any;
+  public dataSelected = {
+  	"province" : "",
+  };
+
+  public cities: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geo: GeoProvider) {
+  	this.showProvincesVe();
+  }
+  
+  showProvincesVe(){
+  	this.geo.getDataVenezuela().subscribe(data => {
+  		console.log("Estados cargados.")
+  		return this.provinces = data;
+  	});
+  }	
+
+  passProvince(index){
+  	console.log(index);
   }
 
   ionViewDidLoad() {

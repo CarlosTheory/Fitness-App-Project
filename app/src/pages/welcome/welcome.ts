@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 
 
 import { SignUpPage } from '../sign-up/sign-up';
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the WelcomePage page.
  *
@@ -31,8 +32,12 @@ export class WelcomePage {
     this.slides.slideTo(2, 500);
   }
 
-  goToStart(){
+  goToSignUp(){
     this.navCtrl.push(SignUpPage);
+  }
+
+  goToLogin(){
+    this.navCtrl.push(LoginPage);
   }
 
   slideChanged() {
