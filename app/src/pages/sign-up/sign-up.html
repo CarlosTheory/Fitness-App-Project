@@ -18,32 +18,32 @@
 
 	  <ion-item>
 	    <ion-label fixed>Nombre</ion-label>
-	    <ion-input type="text"></ion-input>
+	    <ion-input type="text" name="name" [(ngModel)]="dataSelected.name"></ion-input>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-label fixed>Apellido</ion-label>
-	    <ion-input type="text"></ion-input>
+	    <ion-input type="text" name="last_name" [(ngModel)]="dataSelected.last_name"></ion-input>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-label fixed>Correo</ion-label>
-	    <ion-input type="email"></ion-input>
+	    <ion-input type="email" name="email" [(ngModel)]="dataSelected.email"></ion-input>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-label fixed>Clave</ion-label>
-	    <ion-input type="password"></ion-input>
+	    <ion-input type="password" name="password" [(ngModel)]="dataSelected.password"></ion-input>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-label fixed>Verificar Clave</ion-label>
-	    <ion-input type="password"></ion-input>
+	    <ion-input type="password" name="password_validate" [(ngModel)]="dataSelected.password_validate"></ion-input>
 	  </ion-item>
 
 		<ion-item>
 		  <ion-label>Estado</ion-label>
-		  <ion-select [(ngModel)]="dataSelected.province" interface="popover">
+		  <ion-select name="province" [(ngModel)]="dataSelected.province" interface="popover">
 		    <ion-option *ngFor="let province of provinces; let i = index" (ionSelect)="passProvince(i)">
 		    	{{ province.estado }}
 		    </ion-option>
@@ -51,34 +51,38 @@
 		</ion-item>
 
 	  <ion-item>
-	    <ion-label fixed>Ciudad</ion-label>
-	    <ion-input type="text"></ion-input>
+	    <ion-label>Ciudad</ion-label>
+	    <ion-select name="city" [(ngModel)]="dataSelected.city" interface="popover">
+	    	<ion-option *ngFor="let city of cities">
+	    		{{ city }}
+	    	</ion-option>
+	    </ion-select>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-label fixed>Codigo Postal</ion-label>
-	    <ion-input type="text"></ion-input>
+	    <ion-input type="text" name="zip_code" [(ngModel)]="dataSelected.zip_code"></ion-input>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-label fixed>Teléfono</ion-label>
-	    <ion-input type="text"></ion-input>
+	    <ion-input type="text" name="phone" [(ngModel)]="dataSelected.phone"></ion-input>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-label fixed>Dirección</ion-label>
-	    <ion-input type="text"></ion-input>
+	    <ion-input type="text" name="address" [(ngModel)]="dataSelected.address"></ion-input>
 	  </ion-item>
 
 	  <ion-item>
 	  	  <ion-label fixed>Fecha de Nacimiento</ion-label>
-		  <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
+		  <ion-datetime name="birthday" displayFormat="DD/MM/YYYY" [(ngModel)]="dataSelected.birthday"></ion-datetime>
 	  </ion-item>
 
 
 	  <ion-item>
 		  <ion-label fixed>Genero</ion-label>
-			  <ion-select [(ngModel)]="gender">
+			  <ion-select name="gender" [(ngModel)]="dataSelected.gender">
 			    <ion-option value="f">Femenino</ion-option>
 			    <ion-option value="m">Masculino</ion-option>
 			    <ion-option value="o">Otro</ion-option>
@@ -87,4 +91,7 @@
 
 
 	</ion-list>
+	<div padding>
+		<button ion-button block (click)="sendData()">Registrarse</button>
+	</div>
 </ion-content>

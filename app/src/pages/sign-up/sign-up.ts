@@ -18,11 +18,22 @@ import { GeoProvider } from '../../providers/geo/geo';
 export class SignUpPage {
 
   public provinces: any;
+  public cities:any;
   public dataSelected = {
+  	"name" : "",
+  	"last_name" : "",
+  	"email" : "",
+  	"password" : "",
+  	"country" : "Venezuela",
   	"province" : "",
+  	"city" : "",
+  	"zip_code" : "",
+  	"phone" : "",
+  	"address" : "",
+  	"birthday" : "",
+  	"gender" : "",
   };
 
-  public cities: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public geo: GeoProvider) {
   	this.showProvincesVe();
@@ -37,6 +48,17 @@ export class SignUpPage {
 
   passProvince(index){
   	console.log(index);
+  	this.geo.getDataVenezuela().subscribe(data => {
+  		return this.cities = data[index].ciudades;
+  	});
+  }
+
+  sendData(){
+  	this.dataSelected.city = this.dataSelected.city.replace(/\n/ig, '');
+  	this.dataSelected.province = this.dataSelected.province.replace(/\n/ig, '');
+  	console.log(this.dataSelected);
+  	console.log(this.dataSelected.city);
+  	console.log(this.dataSelected.province);
   }
 
   ionViewDidLoad() {
