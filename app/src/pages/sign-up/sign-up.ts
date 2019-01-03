@@ -1,7 +1,11 @@
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 import { GeoProvider } from '../../providers/geo/geo';
+
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the SignUpPage page.
@@ -34,11 +38,14 @@ export class SignUpPage {
   	"gender" : "",
   };
 
+  private URL_SERVER = "http://127.0.0.1:8000/"; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public geo: GeoProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geo: GeoProvider, public http:HttpClient,
+    public loadingCtrl:LoadingController,
+    private alertCtrl: AlertController) {
   	this.showProvincesVe();
   }
-  
+
   showProvincesVe(){
   	this.geo.getDataVenezuela().subscribe(data => {
   		console.log("Estados cargados.")
@@ -54,7 +61,33 @@ export class SignUpPage {
   }
 
   sendData(){
-  	this.dataSelected.city = this.dataSelected.city.replace(/\n/ig, '');
+
+    let alertSuccess = this.alertCtrl.create({
+      title: '¡Registro exitoso!',
+      subTitle: 'Ahora puede ingresar a la aplicacion',
+      buttons: [{
+        text: 'Aceptar',
+        handler:()=>{
+          this.navCtrl.push(LoginPage);
+        },
+      }],
+    });
+
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    const httpOptions = {
+     headers: new HttpHeaders({
+    'Accept': 'application/json',
+    'Content-Type':  'application/json',
+    'Authorization': 'my-auth-token'
+    })
+  };
+    const pathSign = "api/register";
+
+  	return this.http.post(this.URL_SERVER+pathSign, this.dataSelected, httpOptions)
+      .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error"); loading.dismiss()});
+
+    this.dataSelected.city = this.dataSelected.city.replace(/\n/ig, '');
   	this.dataSelected.province = this.dataSelected.province.replace(/\n/ig, '');
   	console.log(this.dataSelected);
   	console.log(this.dataSelected.city);

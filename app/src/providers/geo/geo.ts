@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+//import { HttpClientModule } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -12,11 +12,6 @@ import { SignUpPage } from '../../pages/sign-up/sign-up';
   and Angular DI.
 */
 
-interface ProvinceResponse{
-	id_estado: number;
-	estado: string;
-}
-
 @Injectable()
 export class GeoProvider {
 
@@ -29,7 +24,7 @@ provincesVe = "../../assets/vnzla.json";
   }
 
   getDataVenezuela(){
-  	return this.http.get<ProvinceResponse>(this.provincesVe).map(res => res);
+  	return this.http.get(this.provincesVe).map(res => res);
   }
 
 }
