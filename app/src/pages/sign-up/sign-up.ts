@@ -84,14 +84,14 @@ export class SignUpPage {
   };
     const pathSign = "api/register";
 
+    this.dataSelected.city = this.dataSelected.city.replace(/\n/ig, '');
+    this.dataSelected.province = this.dataSelected.province.replace(/\n/ig, '');
+    console.log(this.dataSelected);
+    console.log(this.dataSelected.city);
+    console.log(this.dataSelected.province);
+
   	return this.http.post(this.URL_SERVER+pathSign, this.dataSelected, httpOptions)
       .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error"); loading.dismiss()});
-
-    this.dataSelected.city = this.dataSelected.city.replace(/\n/ig, '');
-  	this.dataSelected.province = this.dataSelected.province.replace(/\n/ig, '');
-  	console.log(this.dataSelected);
-  	console.log(this.dataSelected.city);
-  	console.log(this.dataSelected.province);
   }
 
   ionViewDidLoad() {

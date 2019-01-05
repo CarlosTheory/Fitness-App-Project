@@ -14,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GeoProvider } from '../providers/geo/geo';
 
 import { HttpClientModule } from '@angular/common/http';
+import { AuthLoginProvider } from '../providers/auth-login/auth-login';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GeoProvider
+    GeoProvider,
+    AuthLoginProvider
   ]
 })
 export class AppModule {}
