@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 //use Validator;
 
 class UserController extends Controller
@@ -67,7 +69,13 @@ class UserController extends Controller
           $birthday = $request->input('birthday');
           $gender = $request->input('gender');
 
-          $user = user::create([
+          $picture = $request->file('picture');
+
+          if(isset($picture)){
+            $extension = $picture->getClientOriginalExtension();
+            Storage::disk('public')->put($picture->getFilename().'.'.$extension,  File::get($picture));
+
+            $user = user::create([
             'name' => $name,
             'last_name' => $last_name,
             'email' => $email,
@@ -80,7 +88,24 @@ class UserController extends Controller
             'address' => $address,
             'birthday' => $birthday,
             'gender' => $gender,
+            'avatar' => $picture->getFilename().'.'.$extension,
           ]);
+          } else {
+            $user = user::create([
+            'name' => $name,
+            'last_name' => $last_name,
+            'email' => $email,
+            'password' => Hash::make($password),
+            'country' => $country,
+            'province' => $province,
+            'city' => $city,
+            'zip_code' => $zip_code,
+            'phone' => $phone,
+            'address' => $address,
+            'birthday' => $birthday,
+            'gender' => $gender
+          ]);
+          }
 
           $success['token'] = $user->createToken('FitnessApp')->accessToken;
           $success['email'] = $user->email;
@@ -105,8 +130,27 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $user_id){
-    	$user = User::findOrFail($user_id);
-    	$user->update($request->all());
+      try{
+        $user = User::findOrFail($user_id);
+        $user->update($request->all());
+
+          if( null !== $request->file('avatar')){
+            $picture = $request->file('avatar');
+            $extension = $picture->getClientOriginalExtension();
+            Storage::disk('public')->put($picture->getFilename().'.'.$extension,  File::get($picture));
+
+            $user->update([
+              'avatar' => $picture->getFilename().'.'.$extension,
+            ]);
+          } 
+      } catch(Illuminate\Database\QueryException $err){
+          $response['status'] = false;
+          $response['message'] = $ex->getMessage();
+
+          return response($response, 500);
+      }
+    	//$user = User::findOrFail($user_id);
+    	//$user->update($request->all());
 
     	return $user;
     }

@@ -35,30 +35,10 @@ export class AuthLoginProvider {
   constructor(public http: HttpClient, private storage:Storage) {
     console.log('Hello AuthLoginProvider Provider');
     this.storage.ready();
-    this.storage.get('token').then((value:any)=>{
-      return this.getUserDetails(value);
-    });
   }
 
   setToken(tokenObj){
     this.storage.set('token', tokenObj.success.token);
-  }
-
-  getUserDetails(token){
-    let auth = "Bearer "+token;
-    let httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Authorization": auth,
-        "Accept": "application/json",
-      })
-    };
-    let path = "api/details";
-
-    return this.http.post(this.URL_SERVER+path,"",httpOptions).subscribe((res:Data) => {
-      this.userDetails = res;
-      console.log(this.userDetails);
-    });
   }
 
   removeToken(){

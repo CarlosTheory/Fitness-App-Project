@@ -5,8 +5,11 @@
     </ion-toolbar>
   </ion-header> -->
   <ion-content>
-  <div id="wrapper" *ngIf="userDetails">
-      <h2>{{ userDetails.user.name + ' ' + userDetails.user.last_name }}</h2>
+  <div class="ProfileCard" *ngIf="userDetails">
+    <a class="ProfileCardLink">
+      <img class="ProfleCardImage" src="{{URL_SERVER}}assets/uploads/{{userDetails.user.avatar}} " alt="Profile Avatar">
+    </a>
+      <span class="ProfileCardName">{{ userDetails.user.name + ' ' + userDetails.user.last_name }}</span>
   </div>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="p.component()">

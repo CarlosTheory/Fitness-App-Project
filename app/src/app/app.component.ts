@@ -24,6 +24,15 @@ export interface User{
   id:number,
   name:string,
   last_name:string,
+  email: string,
+  country: string,
+  province: string,
+  city: string,
+  zip_code: number,
+  address: string,
+  birthday: string,
+  gender: string,
+  avatar: string,
 }
 
 export interface Data{
@@ -45,7 +54,7 @@ export class MyApp {
   private URL_SERVER = "http://127.0.0.1:8000/";
 
   public userDetails:Data;
-
+  public prueba:Data;
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
     public authCtrl:AuthLoginProvider, public storage: Storage, public http: HttpClient) {
     this.initializeApp();
@@ -54,6 +63,7 @@ export class MyApp {
     this.storage.get('token').then((value:any)=>{
       return this.getUserDetails(value);
     });
+
 
     // used for an example of ngFor and navigation  
 /*    this.pages = [
