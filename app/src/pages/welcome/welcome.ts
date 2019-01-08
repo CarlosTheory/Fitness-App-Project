@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, MenuController } from 'ionic-angular';
 
 
 import { SignUpPage } from '../sign-up/sign-up';
@@ -21,7 +21,9 @@ export class WelcomePage {
   @ViewChild(Slides) slides: Slides;
   
   constructor(public navCtrl: NavController, 
-              public navParams: NavParams,) {
+              public navParams: NavParams,
+              public menuCtrl: MenuController) {
+    this.menuCtrl.enable(false,'mainMenu');
   }
 
   ionViewDidLoad() {

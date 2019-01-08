@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 
 import { GeoProvider } from '../../providers/geo/geo';
 
@@ -42,8 +42,10 @@ export class SignUpPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public geo: GeoProvider, public http:HttpClient,
     public loadingCtrl:LoadingController,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    public menuCtrl:MenuController) {
   	this.showProvincesVe();
+    this.menuCtrl.enable(false, 'mainMenu');
   }
 
   showProvincesVe(){

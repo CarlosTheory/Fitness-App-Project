@@ -101,7 +101,7 @@ class UserController extends Controller
 
     public function details(){
       $user = Auth::user();
-      return response()->json(['success' => $user, 200]);
+      return response()->json(['user' => $user, 200]);
     }
 
     public function update(Request $request, $user_id){
