@@ -93,7 +93,7 @@ export class SignUpPage {
     console.log(this.dataSelected.province);
 
   	return this.http.post(this.URL_SERVER+pathSign, this.dataSelected, httpOptions)
-      .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error"); loading.dismiss()});
+      .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error :" + err); loading.dismiss()});
   }
 
   ionViewDidLoad() {
