@@ -27,14 +27,17 @@ export class LoginPage {
 		"password":"",
 	}
 
-	private URL_SERVER = "http://127.0.0.1:8000/"; 
-
+	//private URL_SERVER = "http://127.0.0.1:8000/"; 
+  // public URL_SERVER = "http://10.0.2.2:8000/";
+  private URL_SERVER
   constructor(public navCtrl: NavController, public navParams: NavParams,
   	public http: HttpClient,
     public loadingCtrl: LoadingController, 
     private auth:AuthLoginProvider,
     public menuCtrl: MenuController,) {
     this.menuCtrl.enable(false,'mainMenu'); 
+
+    this.URL_SERVER = this.auth.URL_SERVER;
   }
 
   ionViewDidLoad() {

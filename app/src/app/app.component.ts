@@ -51,7 +51,10 @@ export class MyApp {
   rootPage: any = HomePage;
   token: string;
   pages: Array<{title: string, component: any}>;
-  private URL_SERVER = "http://127.0.0.1:8000/";
+  
+  public URL_SERVER;
+  //private URL_SERVER = "http://127.0.0.1:8000/";
+  // public URL_SERVER = "http://10.0.2.2:8000/";
 
   public userDetails:Data;
   public prueba:Data;
@@ -59,7 +62,7 @@ export class MyApp {
     public authCtrl:AuthLoginProvider, public storage: Storage, public http: HttpClient) {
     this.initializeApp();
     this.checkToken();
-
+    this.URL_SERVER = this.authCtrl.URL_SERVER;
     this.storage.get('token').then((value:any)=>{
       return this.getUserDetails(value);
     });

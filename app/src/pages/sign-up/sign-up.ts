@@ -3,6 +3,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 
+
+import { AuthLoginProvider } from '../../providers/auth-login/auth-login';
 import { GeoProvider } from '../../providers/geo/geo';
 
 import { LoginPage } from '../login/login';
@@ -38,14 +40,19 @@ export class SignUpPage {
   	"gender" : "",
   };
 
-  private URL_SERVER = "http://127.0.0.1:8000/"; 
+  //private URL_SERVER = "http://127.0.0.1:8000/"; 
+  // public URL_SERVER = "http://10.0.2.2:8000/";
 
+  public URL_SERVER;
   constructor(public navCtrl: NavController, public navParams: NavParams, public geo: GeoProvider, public http:HttpClient,
     public loadingCtrl:LoadingController,
     private alertCtrl: AlertController,
-    public menuCtrl:MenuController) {
+    public menuCtrl:MenuController,
+    public auth:AuthLoginProvider) {
   	this.showProvincesVe();
     this.menuCtrl.enable(false, 'mainMenu');
+
+    this.URL_SERVER = this.auth.URL_SERVER;
   }
 
   showProvincesVe(){
@@ -81,7 +88,6 @@ export class SignUpPage {
      headers: new HttpHeaders({
     'Accept': 'application/json',
     'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
     })
   };
     const pathSign = "api/register";
