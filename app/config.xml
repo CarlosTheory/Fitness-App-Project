@@ -85,5 +85,6 @@
     <plugin name="cordova-sqlite-storage" spec="2.6.0" />
     <allow-navigation href="http://192.168.1.100:8100" sessionid="381b9f17" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <engine name="android" spec="7.1.4" />
+    <engine name="android" spec="~7.1.4" />
+    <plugin name="cordova-plugin-file-transfer" spec="1.7.1" />
 </widget>

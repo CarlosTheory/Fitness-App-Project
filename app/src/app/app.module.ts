@@ -11,6 +11,8 @@ import { LoginPage } from '../pages/login/login';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { UserDetailsPage } from '../pages/user-details/user-details';
+import { PostPage } from '../pages/post/post';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,7 +30,9 @@ import { AuthLoginProvider } from '../providers/auth-login/auth-login';
     LoginPage,
     WelcomePage,
     SignUpPage,
-    UserDetailsPage
+    UserDetailsPage,
+    PostPage,
+    ProfilePage
   ],
   imports: [
 
@@ -46,6 +50,8 @@ import { AuthLoginProvider } from '../providers/auth-login/auth-login';
     WelcomePage,
     SignUpPage,
     UserDetailsPage,
+    PostPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,

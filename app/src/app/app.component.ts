@@ -9,11 +9,10 @@ import { Injectable } from '@angular/core';
 
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { LoginPage } from '../pages/login/login';
 import { WelcomePage } from '../pages/welcome/welcome';
-import { SignUpPage } from '../pages/sign-up/sign-up';
 import { UserDetailsPage } from '../pages/user-details/user-details';
+import { PostPage} from '../pages/post/post';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { AuthLoginProvider } from '../providers/auth-login/auth-login';
 
@@ -57,7 +56,6 @@ export class MyApp {
   // public URL_SERVER = "http://10.0.2.2:8000/";
 
   public userDetails:Data;
-  public prueba:Data;
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
     public authCtrl:AuthLoginProvider, public storage: Storage, public http: HttpClient) {
     this.initializeApp();
@@ -66,7 +64,6 @@ export class MyApp {
     this.storage.get('token').then((value:any)=>{
       return this.getUserDetails(value);
     });
-
 
     // used for an example of ngFor and navigation  
 /*    this.pages = [
@@ -77,6 +74,7 @@ export class MyApp {
 
     this.pages = [
       { title: 'Home', component: ()=>{this.nav.push(HomePage)} },
+      { title:'Crear Post', component: ()=>{this.nav.push(PostPage)} },
       { title: 'Mis Datos', component: ()=>{this.nav.push(UserDetailsPage)} },
       { title: 'Cerrar Sesión', component: ()=>{this.authCtrl.removeToken();this.nav.push(WelcomePage);} },
     ];
@@ -104,10 +102,14 @@ export class MyApp {
 
     this.http.post(this.URL_SERVER+path,"",httpOptions).subscribe((res:Data) => {
       this.userDetails = res;
-      console.log(this.userDetails.user.name);
+      //console.log(this.userDetails.user.name);
       return this.userDetails;
     });
   
+  }
+
+  goToProfile(){
+    this.nav.push(ProfilePage);
   }
 
   initializeApp() {

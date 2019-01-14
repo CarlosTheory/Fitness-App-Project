@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { LoginPage } from '../../pages/login/login';
 import { WelcomePage } from '../../pages/welcome/welcome';
-import { MyApp } from '../../app/app.component';
+//import { MyApp } from '../../app/app.component';
 
 import { Storage } from '@ionic/storage';
 
@@ -19,11 +19,20 @@ export interface User{
   id:number,
   name:string,
   last_name:string,
+  email: string,
+  country: string,
+  province: string,
+  city: string,
+  zip_code: number,
+  address: string,
+  birthday: string,
+  gender: string,
+  avatar: string,
 }
 
 export interface Data{
-  user: {
-    [key:string]: User
+  user:{
+    [key:string]: User,
   };
 }
 
@@ -32,7 +41,6 @@ export class AuthLoginProvider {
   public URL_SERVER = "http://127.0.0.1:8000/";
   // public URL_SERVER = "http://10.0.2.2:8000/";
   public userDetails:Data; 
-
   constructor(public http: HttpClient, private storage:Storage) {
     console.log('Hello AuthLoginProvider Provider');
     this.storage.ready();
@@ -41,6 +49,12 @@ export class AuthLoginProvider {
   setToken(tokenObj){
     this.storage.set('token', tokenObj.success.token);
   }
+
+  getUserDetails(){
+    return this.storage.get('token');
+  }
+
+
 
   removeToken(){
     this.storage.remove('token');
