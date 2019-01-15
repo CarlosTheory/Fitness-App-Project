@@ -4,12 +4,9 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header menuToggle *ngIf="Details">
+<ion-header>
 
-  <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
+  <ion-navbar *ngIf="Details" hideBackButton=false>
     <ion-title>{{ Details.user.name+" "+Details.user.last_name }}</ion-title>
   </ion-navbar>
 
@@ -17,16 +14,70 @@
 
 
 <ion-content padding>
-    <ion-list>
-        <ion-item>
-          <ion-label fixed>Username</ion-label>
-          <ion-input type="text" value=""></ion-input>
-        </ion-item>
+   <div class="has-header">
+      <div class="profile-pic-box" *ngIf="Details" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+Details.user.avatar+')'}" (click)="photoWithCamera()" > 
+      </div>
+      <div><ul>
+        <li (click)="uploadImage()">Tomar Foto</li>
+        <li>Subir de la Galeria</li>
+      </ul></div>
+      <ion-list *ngIf="Details">
+
+          <ion-item>
+            <ion-label fixed>Nombre</ion-label>
+            <ion-input type="text" name="name" value="{{ Details.user.name }}"></ion-input>
+          </ion-item>
       
-        <ion-item>
-          <ion-label fixed>Password</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label fixed>Apellido</ion-label>
+            <ion-input type="text" name="last_name" value="{{ Details.user.last_name }}"></ion-input>
+          </ion-item>
       
-      </ion-list>
+          <ion-item>
+            <ion-label fixed>Correo</ion-label>
+            <ion-input type="email" name="email" value="{{ Details.user.email }}" disabled></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label fixed>Clave</ion-label>
+            <ion-input type="password" name="password" value="{{ Details.user.password }}"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label fixed>Verificar Clave</ion-label>
+            <ion-input type="password" name="password_validate"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label fixed>Estado</ion-label>
+            <ion-input type="text" name="province" value="{{ Details.user.province }}" disabled></ion-input>
+          </ion-item>
+      
+          <ion-item>
+              <ion-label fixed>Estado</ion-label>
+              <ion-input type="text" name="province" value="{{ Details.user.city }}" disabled></ion-input>
+            </ion-item>
+      
+          <ion-item>
+            <ion-label fixed>Codigo Postal</ion-label>
+            <ion-input type="text" name="zip_code" value="{{ Details.user.zip_code }}" disabled></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label fixed>Teléfono</ion-label>
+            <ion-input type="text" name="phone" value="{{ Details.user.phone }}"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label fixed>Dirección</ion-label>
+            <ion-input type="text" name="address" value="{{ Details.user.address }}" disabled></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label fixed>Fecha de Nacimiento</ion-label>
+            <ion-input type="text" name="birthday" value="{{ Details.user.birthday }}" disabled></ion-input>
+          </ion-item>
+      
+        </ion-list>
+   </div>
 </ion-content>

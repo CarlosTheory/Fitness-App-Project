@@ -7,46 +7,47 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content *ngIf="posts" padding>
-  <ion-card *ngFor="let post of posts">
+<ion-content padding>
+  <div *ngIf="posts">
+      <ion-card *ngFor="let post of posts">
 
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="{{URL_SERVER}}assets/uploads/{{post.user.avatar}}">
-    </ion-avatar>
-    <h2>{{ post.user.name+" "+post.user.last_name }}</h2>
-    <p>{{ post.created_at }}</p>
-  </ion-item>
-  <ion-item>
-      <h2 class="post-title">{{post.title}}</h2>
-      <span class="post-category" *ngIf="post.categories[0]">→{{ post.categories[0].name }}</span>
-      <img *ngIf="post.media[0]" src="{{URL_SERVER}}assets/uploads/{{post.media[0].name}}">
-  </ion-item>
-  
-
-  <ion-card-content>
-    <p>{{ post.body }}</p>
-  </ion-card-content>
-
-  <!-- <ion-row>
-    <ion-col>
-      <button ion-button icon-start clear small>
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div>12 Likes</div>
-      </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button icon-start clear small>
-        <ion-icon name="text"></ion-icon>
-        <div>4 Comments</div>
-      </button>
-    </ion-col>
-    <ion-col center text-center>
-      <ion-note>
-        11h ago
-      </ion-note>
-    </ion-col>
-  </ion-row> -->
-
-</ion-card>
+          <ion-item>
+            <div class="profile-pic-box" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+post.user.avatar+')'}">
+            </div>
+            <h2>{{ post.user.name+" "+post.user.last_name }}</h2>
+            <p>{{ post.created_at }}</p>
+          </ion-item>
+          <ion-item>
+              <h2 class="post-title">{{post.title}}</h2>
+              <span class="post-category" *ngIf="post.categories[0]">→{{ post.categories[0].name }}</span>
+              <img *ngIf="post.media[0]" src="{{URL_SERVER}}assets/uploads/{{post.media[0].name}}">
+          </ion-item>
+          
+        
+          <ion-card-content>
+            <p>{{ post.body }}</p>
+          </ion-card-content>
+        
+          <!-- <ion-row>
+            <ion-col>
+              <button ion-button icon-start clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>12 Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-start clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>4 Comments</div>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note>
+                11h ago
+              </ion-note>
+            </ion-col>
+          </ion-row> -->
+        
+        </ion-card>
+  </div>
 </ion-content>

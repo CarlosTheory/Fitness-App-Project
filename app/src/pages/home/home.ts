@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
-import { HttpClient } from '@angular/common/http';
+import { NavController, MenuController, Events } from 'ionic-angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 //Provider
 import { AuthLoginProvider } from '../../providers/auth-login/auth-login';
@@ -56,17 +57,25 @@ export class HomePage {
 
   public posts: any;
   public URL_SERVER;
+  public userDetails;
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
     public authCtrl: AuthLoginProvider,
-    public http: HttpClient) {
+    public http: HttpClient,
+    public storage: Storage,
+    public events: Events) {
     this.menuCtrl.enable(true,"mainMenu");
     this.URL_SERVER = this.authCtrl.URL_SERVER;
     this.getPosts();
+    this.confirmTokenExists("hola");
   }
 
   showMenu(){
   	this.menuCtrl.toggle('mainMenu');
+  }
+
+  confirmTokenExists(app){
+    this.events.publish('app:component', app);      
   }
 
   getPosts(){

@@ -5,10 +5,9 @@
     </ion-toolbar>
   </ion-header> -->
   <ion-content>
-  <div class="ProfileCard" *ngIf="userDetails">
-    <a class="ProfileCardLink" (click)="goToProfile()">
-      <img class="ProfleCardImage" src="{{URL_SERVER}}assets/uploads/{{userDetails.user.avatar}} " alt="Profile Avatar">
-    </a>
+  <div class="ProfileCard" *ngIf="userDetails" (click)="profile[0].component()">
+    <div class="ProfileCardLink" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+userDetails.user.avatar+')'}">
+    </div>
       <span class="ProfileCardName">{{ userDetails.user.name + ' ' + userDetails.user.last_name }}</span>
   </div>
     <ion-list>

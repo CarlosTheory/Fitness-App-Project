@@ -1,5 +1,5 @@
 import { Component, ViewChild,  Pipe, PipeTransform } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -50,6 +50,7 @@ export class MyApp {
   rootPage: any = HomePage;
   token: string;
   pages: Array<{title: string, component: any}>;
+  profile: Array<{title: string, component: any}>;
   
   public URL_SERVER;
   //private URL_SERVER = "http://127.0.0.1:8000/";
@@ -57,7 +58,8 @@ export class MyApp {
 
   public userDetails:Data;
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-    public authCtrl:AuthLoginProvider, public storage: Storage, public http: HttpClient) {
+    public authCtrl:AuthLoginProvider, public storage: Storage, public http: HttpClient, public events: Events,
+    public loadingCtrl: LoadingController) {
     this.initializeApp();
     this.checkToken();
     this.URL_SERVER = this.authCtrl.URL_SERVER;
@@ -65,6 +67,9 @@ export class MyApp {
       return this.getUserDetails(value);
     });
 
+    events.subscribe('app:component', (app) => {
+     this.checkToken();
+  });
     // used for an example of ngFor and navigation  
 /*    this.pages = [
       { title: 'Home', component: HomePage },
@@ -76,8 +81,19 @@ export class MyApp {
       { title: 'Home', component: ()=>{this.nav.push(HomePage)} },
       { title:'Crear Post', component: ()=>{this.nav.push(PostPage)} },
       { title: 'Mis Datos', component: ()=>{this.nav.push(UserDetailsPage)} },
-      { title: 'Cerrar Sesión', component: ()=>{this.authCtrl.removeToken();this.nav.push(WelcomePage);} },
+      { title: 'Cerrar Sesión', component: ()=>{let loading = this.loadingCtrl.create();
+                                                loading.present()
+                                                this.authCtrl.removeToken();this.checkToken();loading.dismiss();} 
+                                               },
     ];
+
+    this.profile = [
+      { title: 'Perfil', component: ()=>{this.nav.push (ProfilePage)} },
+    ];
+
+    this.profile.forEach(value => {
+      console.log(value);
+    });
   }
 
   checkToken(){

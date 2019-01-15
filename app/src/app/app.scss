@@ -33,31 +33,29 @@
 // }
 
 
+// .ProfileCardLink {
+//     margin-top: 10px;
+//     margin-left: 10px;
+
+//     border-radius: 50%;
+// }
+
 .ProfileCardLink {
     margin-top: 10px;
     margin-left: 10px;
-    background-color: #fff;
+    background-size: cover;
     border-radius: 50%;
-}
-
-.ProfleCardImage {
-    margin-top: 10px;
-    margin-left: 10px;
-    border-radius: 50%;
-    height: 85px;
-    width: 85px;
+    height: 70px;
+    width: 70px;
     border: 2px solid #fff;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    color: #fff;
     float: left;
     margin-right: 10px; 
 }
 
 .ProfileCardName {
+    padding-top:25px;
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
     display: block;
-    margin-top: 20px;
 }

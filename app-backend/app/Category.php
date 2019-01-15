@@ -10,11 +10,11 @@ class Category extends Model
 
     protected $guarded = [];
 
-    protected $attributes = [
+   /* protected $attributes = [
     	'active' = 1,
-    ];
+    ]; */
 
     public function post_category(){
-    	return $this->hasMany('App\Post')
+    	return $this->belongsToMany('App\Post');
     }
 }

@@ -21,6 +21,9 @@ import { GeoProvider } from '../providers/geo/geo';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthLoginProvider } from '../providers/auth-login/auth-login';
 
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer} from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 @NgModule({
   declarations: [
@@ -31,8 +34,9 @@ import { AuthLoginProvider } from '../providers/auth-login/auth-login';
     WelcomePage,
     SignUpPage,
     UserDetailsPage,
+    ProfilePage,
     PostPage,
-    ProfilePage
+    
   ],
   imports: [
 
@@ -50,15 +54,18 @@ import { AuthLoginProvider } from '../providers/auth-login/auth-login';
     WelcomePage,
     SignUpPage,
     UserDetailsPage,
+    ProfilePage,
     PostPage,
-    ProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GeoProvider,
-    AuthLoginProvider
+    AuthLoginProvider,
+    File,
+    FileTransfer,
   ]
 })
 export class AppModule {}

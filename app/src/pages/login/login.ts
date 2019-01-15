@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, MenuController } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
@@ -8,6 +8,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { AuthLoginProvider } from '../../providers/auth-login/auth-login';
 
 import { HomePage } from '../home/home';
+
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -34,7 +36,7 @@ export class LoginPage {
   	public http: HttpClient,
     public loadingCtrl: LoadingController, 
     private auth:AuthLoginProvider,
-    public menuCtrl: MenuController,) {
+    public menuCtrl: MenuController, public storage: Storage) {
     this.menuCtrl.enable(false,'mainMenu'); 
 
     this.URL_SERVER = this.auth.URL_SERVER;
@@ -59,9 +61,16 @@ export class LoginPage {
   	return this.http.post(this.URL_SERVER+path, this.loginData, httpOptions).subscribe(res => {
       console.log(res);loading.dismiss();
       this.auth.setToken(res);
-      window.location.reload();
+      this.storage.get('token').then(value => {
+        if(value){
+          loading.dismiss();
+          window.location.reload();
+        }
+      });
+      //window.location.reload();
+      this.navCtrl.push(HomePage);
       },err =>{
-        console.log('Error', err); loading.dismiss()
+        console.log('Error', err); loading.dismiss();
       });
   }
 

@@ -21,13 +21,12 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('details','UserController@details');
 	Route::post('update/{user_id}', 'UserController@update');
 
-	Route::post('post/{user_id}/create', 'PostController@create');
-});
-
-	//Posts
 	
-	Route::get('posts', 'PostController@index');
-
+});
+//Posts
+Route::post('cat/new', 'CategoryController@register');	
+Route::get('posts', 'PostController@index');
+Route::post('post/{user_id}/create/{category_id}', 'PostController@create');
 
 //Nope
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
