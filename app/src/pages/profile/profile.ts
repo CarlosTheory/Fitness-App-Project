@@ -73,19 +73,6 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
   }
 
-  showProvincesVe(){
-    this.geo.getDataVenezuela().subscribe(data => {
-      console.log("Estados cargados.")
-      return this.provinces = data;
-    });
-  }  
-
-  passProvince(index){
-    console.log(index);
-    this.geo.getDataVenezuela().subscribe(data => {
-      return this.cities = data[index].ciudades;
-    });
-  }
 
   getUserDetails(token){
     let auth = "Bearer "+token;

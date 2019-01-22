@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, MenuController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController, Events, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { HttpClient } from '@angular/common/http';
@@ -37,7 +37,7 @@ export class LoginPage {
     public loadingCtrl: LoadingController, 
     private auth:AuthLoginProvider,
     public menuCtrl: MenuController, public storage: Storage,
-    public events: Events) {
+    public events: Events, private alertCtrl: AlertController) {
     this.menuCtrl.enable(false,'mainMenu'); 
 
     this.URL_SERVER = this.auth.URL_SERVER;
@@ -52,6 +52,17 @@ export class LoginPage {
   }
 
   authLogin(){
+    let alertError = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: 'Los datos no son correctos',
+      buttons: [{
+        text: 'Aceptar',
+        handler:()=>{
+          this.navCtrl.push(LoginPage);
+        },
+      }],
+    });
+
     let loading = this.loadingCtrl.create();
     loading.present();
 
@@ -77,7 +88,7 @@ export class LoginPage {
       //window.location.reload();
       this.navCtrl.push(HomePage);
       },err =>{
-        console.log('Error', err); loading.dismiss();
+        console.log('Error', err); loading.dismiss(); alertError.present();
       });
   }
 

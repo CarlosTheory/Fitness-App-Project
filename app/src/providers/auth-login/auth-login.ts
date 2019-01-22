@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 
 import { LoginPage } from '../../pages/login/login';
 import { WelcomePage } from '../../pages/welcome/welcome';
-//import { MyApp } from '../../app/app.component';
 
 import { Storage } from '@ionic/storage';
 import { Events } from "ionic-angular";
