@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, Events } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
@@ -46,10 +46,11 @@ export interface Data{
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
+  public provinces: any;
   public Details:Data;
   public URL_SERVER: string;
   public userPhoto: string;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public storage: Storage, public auth: AuthLoginProvider, public http: HttpClient, private camera: Camera,
@@ -58,6 +59,7 @@ export class ProfilePage {
     private transfer: FileTransfer, 
     private file: File,
     private loadingCtrl: LoadingController,
+    public events: Events,
   ){
     this.URL_SERVER = this.auth.URL_SERVER;
     this.storage.get('token').then((value:any)=>{
@@ -69,6 +71,20 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+  }
+
+  showProvincesVe(){
+    this.geo.getDataVenezuela().subscribe(data => {
+      console.log("Estados cargados.")
+      return this.provinces = data;
+    });
+  }  
+
+  passProvince(index){
+    console.log(index);
+    this.geo.getDataVenezuela().subscribe(data => {
+      return this.cities = data[index].ciudades;
+    });
   }
 
   getUserDetails(token){
@@ -93,6 +109,7 @@ export class ProfilePage {
   photoWithCamera(){
     let options: CameraOptions = {
       destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
       targetWidth: 1000,
       targetHeight: 1000,
       quality: 100
@@ -107,6 +124,31 @@ export class ProfilePage {
       }, (err) => {
          console.log("Error: "+err);
       });
+  }
+
+  getImage() {
+    const options: CameraOptions = {
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum:false
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      this.userPhoto = 'data:image/jpeg;base64,' + imageData;
+      console.log(this.userPhoto);
+      this.uploadImage();
+      this.events.publish('user:data');
+      
+      this.storage.get('token').then((value:any)=>{
+        return this.getUserDetails(value);
+      });
+    }, (err) => {
+      // Handle error
+    });
   }
 
    cropImage() {
@@ -141,7 +183,7 @@ export class ProfilePage {
     const fileTransfer: FileTransferObject = this.transfer.create();
 
     //random int
-    var random = Math.floor(Math.random() * 10);
+    //var random = Math.floor(Math.random() * 10);
 
     //option transfer  
     let options: FileUploadOptions = {
@@ -164,6 +206,7 @@ export class ProfilePage {
       .then((data) => {
         console.log('Imagen subida: '+data);
         loader.dismiss();
+        this.events.publish('user:data');
         this.storage.get('token').then((value:any)=>{
           return this.getUserDetails(value);
         });

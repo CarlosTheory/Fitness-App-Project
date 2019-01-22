@@ -17,6 +17,7 @@
    <div class="has-header">
       <div class="profile-pic-box" *ngIf="Details" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+Details.user.avatar+')'}" (click)="photoWithCamera()" > 
       </div>
+      <button ion-button block outline (click)="getImage()">Elegir de Galeria</button>
       <ion-list *ngIf="Details">
 
           <ion-item>

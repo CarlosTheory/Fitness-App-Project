@@ -65,7 +65,6 @@ export class LoginPage {
   	let path = "api/login";
   	  this.http.post(this.URL_SERVER+path, this.loginData, httpOptions).subscribe(res => {
       console.log(res);
-      loading.dismiss();
       this.auth.setToken(res);
       this.storage.get('token').then(value => {
         if(value){
