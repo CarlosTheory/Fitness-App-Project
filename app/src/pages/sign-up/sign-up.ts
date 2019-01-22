@@ -82,6 +82,17 @@ export class SignUpPage {
       }],
     });
 
+    let alertError = this.alertCtrl.create({
+      title: 'Ha ocurrido un error',
+      subTitle: 'Puedes intentar de nuevo, recuerda que los campos con (*) son requeridos obligatoriamente',
+      buttons: [{
+        text: 'Aceptar',
+        handler:()=>{
+          this.navCtrl.push(LoginPage);
+        },
+      }],
+    });
+
     let loading = this.loadingCtrl.create();
     loading.present();
     const httpOptions = {
@@ -99,7 +110,7 @@ export class SignUpPage {
     console.log(this.dataSelected.province);
 
   	return this.http.post(this.URL_SERVER+pathSign, this.dataSelected, httpOptions)
-      .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error :" + err); loading.dismiss()});
+      .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error :" + err); alertSuccess.present(); loading.dismiss()});
   }
 
   ionViewDidLoad() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { HttpClient } from '@angular/common/http';
@@ -36,7 +36,8 @@ export class LoginPage {
   	public http: HttpClient,
     public loadingCtrl: LoadingController, 
     private auth:AuthLoginProvider,
-    public menuCtrl: MenuController, public storage: Storage) {
+    public menuCtrl: MenuController, public storage: Storage,
+    public events: Events) {
     this.menuCtrl.enable(false,'mainMenu'); 
 
     this.URL_SERVER = this.auth.URL_SERVER;
@@ -44,6 +45,10 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  reloadData(){
+    this.events.publish('user:data');
   }
 
   authLogin(){
@@ -58,15 +63,18 @@ export class LoginPage {
   	};
 
   	let path = "api/login";
-  	return this.http.post(this.URL_SERVER+path, this.loginData, httpOptions).subscribe(res => {
-      console.log(res);loading.dismiss();
+  	  this.http.post(this.URL_SERVER+path, this.loginData, httpOptions).subscribe(res => {
+      console.log(res);
+      loading.dismiss();
       this.auth.setToken(res);
       this.storage.get('token').then(value => {
         if(value){
           loading.dismiss();
-          window.location.reload();
+          this.events.publish('user:data');
+          //window.location.reload();
         }
       });
+
       //window.location.reload();
       this.navCtrl.push(HomePage);
       },err =>{

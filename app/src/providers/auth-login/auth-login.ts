@@ -39,7 +39,12 @@ export interface Data{
 @Injectable()
 export class AuthLoginProvider {
   //public URL_SERVER = "http://127.0.0.1:8000/";
+
+  // Android Emulator
   public URL_SERVER = "http://10.0.2.2:8000/";
+
+  // GenyMotion Emulator
+  //public URL_SERVER = "http://10.0.3.15:8000/";
   public userDetails:Data; 
   constructor(public http: HttpClient, private storage:Storage) {
     console.log('Hello AuthLoginProvider Provider');

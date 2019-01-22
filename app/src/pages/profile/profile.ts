@@ -103,7 +103,7 @@ export class ProfilePage {
  // If it's base64 (DATA_URL):
      this.userPhoto = 'data:image/jpeg;base64,' + imageData;
      this.uploadImage();
-     //console.log(this.userPhoto);
+     console.log(this.userPhoto);
       }, (err) => {
          console.log("Error: "+err);
       });
@@ -133,7 +133,7 @@ export class ProfilePage {
     //Show loading
     let path = 'api/update/'+this.Details.user.id;
     let loader = this.loadingCtrl.create({
-      content: "Uploading..."
+      content: "Subiendo..."
     });
     loader.present();
 
@@ -162,8 +162,11 @@ export class ProfilePage {
     //file transfer action
     fileTransfer.upload(this.userPhoto, this.URL_SERVER+path, options)
       .then((data) => {
-        alert("Success");
+        console.log('Imagen subida: '+data);
         loader.dismiss();
+        this.storage.get('token').then((value:any)=>{
+          return this.getUserDetails(value);
+        });
       }, (err) => {
         console.log(err);
         alert("Error");

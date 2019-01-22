@@ -3,6 +3,7 @@ import { Nav, Platform, Events, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -67,9 +68,10 @@ export class MyApp {
       return this.getUserDetails(value);
     });
 
-    events.subscribe('app:component', (app) => {
-     this.checkToken();
-  });
+    events.subscribe('user:data', () => {
+    this.reloadToken();
+    });
+
     // used for an example of ngFor and navigation  
 /*    this.pages = [
       { title: 'Home', component: HomePage },
@@ -93,6 +95,12 @@ export class MyApp {
 
     this.profile.forEach(value => {
       console.log(value);
+    });
+  }
+
+  reloadToken(){
+    this.storage.get('token').then((value:any)=>{
+      return this.getUserDetails(value);
     });
   }
 

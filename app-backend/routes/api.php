@@ -19,10 +19,9 @@ Route::post('register', 'UserController@register');
 Route::group(['middleware' => 'auth:api'], function(){
 	//User
 	Route::post('details','UserController@details');
-	Route::post('update/{user_id}', 'UserController@update');
-
 	
 });
+Route::post('update/{user_id}', 'UserController@update');	
 //Posts
 Route::post('cat/new', 'CategoryController@register');	
 Route::get('posts', 'PostController@index');
