@@ -68,6 +68,10 @@ export class HomePage {
     this.URL_SERVER = this.authCtrl.URL_SERVER;
     this.getPosts();
     this.confirmTokenExists("hola");
+
+    events.subscribe('posts:reload', ()=>{
+      this.getPosts();
+    });
   }
 
   showMenu(){

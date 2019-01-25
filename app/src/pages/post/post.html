@@ -14,5 +14,32 @@
 
 
 <ion-content padding>
+	<ion-list>
+		<ion-item *ngIf="postDataSelected">
+	    <ion-label fixed>Titulo</ion-label>
+	    <ion-input type="text" name="title" [(ngModel)]="postDataSelected.title"></ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	  	<ion-label fixed>Descripción</ion-label>
+    	<ion-textarea placeholder="Escribe el texto aqui..." [(ngModel)]="postDataSelected.body"></ion-textarea>
+  	</ion-item>
+
+		<ion-item *ngIf=categorySelected>
+		  <ion-label>Categoria</ion-label>
+		  <ion-select name="category" [(ngModel)]="categorySelected.name" interface="popover">
+		    <ion-option *ngFor="let category of categories" (ionSelect)="passCategoryId(category.id)">
+		    	{{ category.name }}
+		    </ion-option>
+		  </ion-select>
+		</ion-item>	
+
+		<div *ngIf="mediaPost">
+	    <img src="{{ mediaPost }}">
+	  </div>
+	</ion-list>
+
+	<div><button ion-button block (click)="getImage()">Elegir Imagen</button></div>
+	<div><button ion-button block (click)="uploadPost()">Publicar Post</button></div>
 
 </ion-content>

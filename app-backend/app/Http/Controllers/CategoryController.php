@@ -35,4 +35,9 @@ class CategoryController extends Controller
             return response($response, 500);
         }
     }
+
+    public function index(){
+        $categories = Category::all();
+        return $categories;
+    }
 }
