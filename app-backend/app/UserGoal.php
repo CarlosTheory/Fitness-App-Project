@@ -11,4 +11,8 @@ class UserGoal extends Model
     protected $attributes = [
     	'active' = 1,
     ];
+
+    public function user(){
+    	return $this->belongsTo('App\User', 'user_id');
+    }
 }

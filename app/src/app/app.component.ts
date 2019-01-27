@@ -82,7 +82,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: ()=>{this.nav.push(HomePage)} },
       { title:'Crear Post', component: ()=>{this.nav.push(PostPage)} },
-      { title: 'Mis Datos', component: ()=>{this.nav.push(UserDetailsPage)} },
+      { title: 'Mis Datos', component: ()=>{this.nav.push(ProfilePage)} },
       { title: 'Cerrar Sesión', component: ()=>{let loading = this.loadingCtrl.create();
                                                 loading.present()
                                                 this.authCtrl.removeToken();this.checkToken();loading.dismiss();} 

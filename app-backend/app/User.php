@@ -32,6 +32,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+    public function goals(){
+        return $this->hasMany('App\UserGoal');
+    }
+
 /*    public function details(){
         return $this->em
     }*/
