@@ -167,6 +167,7 @@ export class PostPage {
         console.log('Post Creado: ' + data.response);
         loader.dismiss();
         this.events.publish('posts:reload');
+        this.navCtrl.push(HomePage);
         // this.storage.get('token').then((value:any)=>{
         //   return this.getUserDetails(value);
         // });
