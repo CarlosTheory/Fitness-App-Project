@@ -32,6 +32,9 @@ Route::post('post/{user_id}/create/{category_id}', 'PostController@create');
 //     return $request->user();
 // });
 
+//Goals
+Route::get('{user_id}/goal', 'UserGoalController@getGoals');
+
 //Categories
 Route::get('categories', 'CategoryController@index');
 

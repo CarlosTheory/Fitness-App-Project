@@ -9,7 +9,7 @@ class UserGoal extends Model
     protected $table = 'user_goals';
     protected $guarded = [];
     protected $attributes = [
-    	'active' = 1,
+    	'active' => 1,
     ];
 
     public function user(){
