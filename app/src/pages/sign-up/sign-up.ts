@@ -30,6 +30,7 @@ export class SignUpPage {
   	"last_name" : "",
   	"email" : "",
   	"password" : "",
+    "password_validate": "",
   	"country" : "Venezuela",
   	"province" : "",
   	"city" : "",
@@ -69,6 +70,12 @@ export class SignUpPage {
   	});
   }
 
+
+
+   firstLetterCase(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   sendData(){
 
     let alertSuccess = this.alertCtrl.create({
@@ -87,8 +94,21 @@ export class SignUpPage {
       subTitle: 'Puedes intentar de nuevo, recuerda que los campos con (*) son requeridos obligatoriamente',
       buttons: [{
         text: 'Aceptar',
+        role: 'cancel',
         handler:()=>{
-          this.navCtrl.push(LoginPage);
+          console.log("paso un error");
+        },
+      }],
+    });
+
+    let alertPassword = this.alertCtrl.create({
+      title: 'Ha ocurrido un error',
+      subTitle: 'El campo contraseña y validar contraseña, deben ser iguales',
+      buttons: [{
+        text: 'Aceptar',
+        role: 'cancel',
+        handler:()=>{
+          console.log("las claves no concuerdan");
         },
       }],
     });
@@ -103,14 +123,21 @@ export class SignUpPage {
   };
     const pathSign = "api/register";
 
+    this.dataSelected.name = this.firstLetterCase(this.dataSelected.name);
+    this.dataSelected.last_name = this.firstLetterCase(this.dataSelected.last_name);
+    this.dataSelected.address = this.firstLetterCase(this.dataSelected.address);
     this.dataSelected.city = this.dataSelected.city.replace(/\n/ig, '');
     this.dataSelected.province = this.dataSelected.province.replace(/\n/ig, '');
-    console.log(this.dataSelected);
-    console.log(this.dataSelected.city);
-    console.log(this.dataSelected.province);
 
-  	return this.http.post(this.URL_SERVER+pathSign, this.dataSelected, httpOptions)
-      .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error :" + err); alertSuccess.present(); loading.dismiss()});
+    if(this.dataSelected.password === this.dataSelected.password_validate){
+      return this.http.post(this.URL_SERVER+pathSign, this.dataSelected, httpOptions)
+      .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error :" + JSON.stringify(err)); alertError.present(); loading.dismiss()});
+    } else {
+      alertPassword.present();
+      loading.dismiss();
+    }
+
+  	
   }
 
   ionViewDidLoad() {

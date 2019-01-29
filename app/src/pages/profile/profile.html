@@ -6,14 +6,14 @@
 -->
 <ion-header>
 
-  <ion-navbar *ngIf="Details" hideBackButton=false>
-    <ion-title>{{ Details.user.name+" "+Details.user.last_name }}</ion-title>
+  <ion-navbar>
+    <ion-title>Mi Perfil</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding *ngIf="Details">
    <div class="has-header">
       <div class="profile-pic-box" *ngIf="Details" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+Details.user.avatar+')'}" (click)="photoWithCamera()" > 
       </div>

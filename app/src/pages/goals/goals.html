@@ -7,12 +7,36 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>goals</ion-title>
+    <ion-title>Mis Metas</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+	<ion-list inset *ngFor="let goal of userGoals">
+		<ion-item>
+			{{ goal.name }}
+		</ion-item>
+	</ion-list>
+	<ion-list>
+		<ion-item>
+		  <ion-label>Agregar Meta</ion-label>
+		  <ion-select interface="popover" [(ngModel)]="selectGoal" name="goal">
+		  	<ion-option value="Bajar Peso">
+		    	Bajar Peso
+		    </ion-option>
+		    <ion-option value="Nutrición">
+		    	Nutrición
+		    </ion-option>
+		    <ion-option value="Ganar Masa Muscular">
+		    	Ganar Masa Muscular
+		    </ion-option>
+		    <ion-option value="Peso Ideal">
+		    	Peso Ideal
+		    </ion-option>
+		  </ion-select>
+		</ion-item>
+		<button ion-button block (click)="addGoal()">Agregar</button>
+	</ion-list>
 </ion-content>

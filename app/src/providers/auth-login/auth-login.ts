@@ -58,8 +58,6 @@ export class AuthLoginProvider {
     return this.storage.get('token');
   }
 
-
-
   removeToken(){
     this.storage.remove('token');
     this.storage.get('token').then(value =>{

@@ -11,8 +11,9 @@ import { LoginPage } from '../pages/login/login';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { UserDetailsPage } from '../pages/user-details/user-details';
-import { PostPage } from '../pages/post/post';
 import { ProfilePage } from '../pages/profile/profile';
+import { PostPage } from '../pages/post/post';
+import { GoalsPage } from '../pages/goals/goals';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,6 +37,7 @@ import { File } from '@ionic-native/file';
     UserDetailsPage,
     ProfilePage,
     PostPage,
+    GoalsPage
     
   ],
   imports: [
@@ -56,6 +58,7 @@ import { File } from '@ionic-native/file';
     UserDetailsPage,
     ProfilePage,
     PostPage,
+    GoalsPage
   ],
   providers: [
     StatusBar,

@@ -14,6 +14,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { UserDetailsPage } from '../pages/user-details/user-details';
 import { PostPage} from '../pages/post/post';
 import { ProfilePage } from '../pages/profile/profile';
+import { GoalsPage } from '../pages/goals/goals';
 
 import { AuthLoginProvider } from '../providers/auth-login/auth-login';
 
@@ -81,8 +82,9 @@ export class MyApp {
 
     this.pages = [
       { title: 'Home', component: ()=>{this.nav.push(HomePage)} },
-      { title:'Crear Post', component: ()=>{this.nav.push(PostPage)} },
       { title: 'Mis Datos', component: ()=>{this.nav.push(ProfilePage)} },
+      { title:'Mis Metas', component: ()=>{this.nav.push(GoalsPage)} },
+      { title:'Crear Post', component: ()=>{this.nav.push(PostPage)} },
       { title: 'Cerrar Sesión', component: ()=>{let loading = this.loadingCtrl.create();
                                                 loading.present()
                                                 this.authCtrl.removeToken();this.checkToken();loading.dismiss();} 
@@ -131,6 +133,7 @@ export class MyApp {
     });
   
   }
+
 
   goToProfile(){
     this.nav.push(ProfilePage);
