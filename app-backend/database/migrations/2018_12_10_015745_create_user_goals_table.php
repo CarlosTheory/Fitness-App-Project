@@ -16,8 +16,9 @@ class CreateUserGoalsTable extends Migration
         Schema::create('user_goals', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 150);
-            $table->string('description', 250);
+            $table->string('description', 250)->nullable();
             $table->unsignedInteger('user_id');
+            $table->boolean('active');
             $table->timestamps();
 
             //$table->foreign('user_id')->references('id')->on('users');

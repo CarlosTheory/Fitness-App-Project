@@ -17,4 +17,36 @@ class UserGoalController extends Controller
     		return $goals;
     	}
     }
+
+    public function addGoal(Request $request){
+    	$rules = [
+    		"name" => "required",
+    		"user_id" => "required",
+    	];
+
+    	$customMessage = ["required" => "Estos campos son necesarios :attribute"];
+    	$this->validate($request, $rules, $customMessage);
+
+    	try{
+    		$name = $request->input("name");
+    		$description = $request->input("description");
+    		$user_id = $request->input('user_id');
+
+    		$goal = UserGoal::create([
+    			'name' => $name,
+    			'description' => $description,
+    			'user_id' => $user_id
+    		]);
+
+    		$goal->save();
+
+    		return response()->json(['Meta agregada' => true], 201);
+    	}catch(\Illuminate\Database\QueryException $ex){
+        $response['status'] = false;
+        $response['message'] = $ex->getMessage();
+
+        return response($response, 500);
+      }
+
+    }
 }
