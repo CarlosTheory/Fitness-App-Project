@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { AddGoalPostPage } from '../add-goal-post/add-goal-post';
 
 
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
@@ -102,6 +103,11 @@ export class PostPage {
 
   }
 
+  firstLetterCase(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+
   getImage() {
     const options: CameraOptions = {
       quality: 70,
@@ -141,6 +147,9 @@ export class PostPage {
     //var random = Math.floor(Math.random() * 10);
 
     //option transfer  
+
+    this.postDataSelected.title = this.firstLetterCase(this.postDataSelected.title);
+    this.postDataSelected.body = this.firstLetterCase(this.postDataSelected.body);
     let options: FileUploadOptions = {
       fileKey: 'media',
       fileName: "myImage_"+".jpg",
@@ -167,7 +176,7 @@ export class PostPage {
         console.log('Post Creado: ' + data.response);
         loader.dismiss();
         this.events.publish('posts:reload');
-        this.navCtrl.push(HomePage);
+        this.navCtrl.push(AddGoalPostPage);
         // this.storage.get('token').then((value:any)=>{
         //   return this.getUserDetails(value);
         // });
@@ -182,39 +191,6 @@ export class PostPage {
   passCategoryId(id){
   	console.log(id);
   	return this.categoryId = id;
-  }
-
-  createPost(){
-  	    //Show loading
-    let path = 'api/post/'+this.Details.user.id+'/create/'+this.categoryId;
-    let loader = this.loadingCtrl.create({
-      content: "Subiendo..."
-    });
-    loader.present();
-
-     const httpOptions = {
-  		headers: new HttpHeaders({
-  		"Accept":"application/json",
-  		"Content-Type":"multipart/form-data",
-  		})
-  	};
-
-  		let body = {
-  			"title": this.postDataSelected.title,
-  			"body": this.postDataSelected.body,
-  			"user_id":this.Details.user.id,
-  			"media":this.mediaPost,
-  		};
-
-    this.http.post(this.URL_SERVER+path, body, httpOptions).subscribe(data => {
-    	loader.dismiss();
-    	console.log(JSON.stringify(body));
-    	console.log(JSON.stringify(data));
-    }, err => {
-    	loader.dismiss();
-    	console.log(JSON.stringify(body));
-    	console.log(JSON.stringify(err));
-    });
   }
 
   ionViewDidLoad() {

@@ -27,4 +27,8 @@ class Post extends Model
     public function categories(){
     	return $this->belongsToMany('App\Category');
     }
+
+    public function goals(){
+        return $this->belongsToMany('App\Goal');
+    }
 }

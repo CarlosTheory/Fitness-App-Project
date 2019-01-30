@@ -29,9 +29,10 @@ export interface Data{
 export class GoalsPage {
 	public URL_SERVER
 	public userId;
+	public goalId;
 
-	public selectGoal;
 	public userGoals;
+	public allGoals;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public auth: AuthLoginProvider, public alertCtrl: AlertController,
   	public storage: Storage) {
   	this.URL_SERVER = this.auth.URL_SERVER
@@ -39,6 +40,7 @@ export class GoalsPage {
   	this.storage.get('token').then(value => {
   		return this.getUserDetails(value);
   	});
+  	this.getAllGoals();
   }
 
   ionViewDidLoad() {
@@ -64,9 +66,14 @@ export class GoalsPage {
   
   }
 
+  passGoalId(goalId){
+  	return this.goalId = goalId;
+  }
+
   addGoal(){
   	console.log(this.userId);
-  	let path = "api/add/goal";
+  	console.log(this.goalId);
+  	let path = "api/add/usergoal";
   	let httpOptions = {
   		headers:new HttpHeaders({
   			"Content-Type":"application/json",
@@ -75,14 +82,33 @@ export class GoalsPage {
   	};
 
   	let request = {
-  		"name": this.selectGoal,
   		"user_id": this.userId,
+  		"goal_id": this.goalId,
   	};
 
   	this.http.post(this.URL_SERVER+path, request, httpOptions).subscribe(res => {
   		console.log(res);
+  		this.getAllGoals();
   		this.checkGoals();
   	});
+  }
+
+  getAllGoals(){
+  	let path = "api/goals";
+  	let httpOptions = {
+  		headers: new HttpHeaders({
+  			"Content-Type": "application/json",
+  			"Accept":"application/json",
+  		}),
+  	};
+
+  	this.http.get(this.URL_SERVER+path, httpOptions).subscribe(res => {
+  		this.allGoals = res;
+  		this.allGoals.forEach(value => {
+  			return this.allGoals;
+  		});
+  	});
+
   }
 
   checkGoals(){

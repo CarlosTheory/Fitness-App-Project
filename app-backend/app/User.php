@@ -33,7 +33,7 @@ class User extends Authenticatable
     }
 
     public function goals(){
-        return $this->hasMany('App\UserGoal');
+        return $this->belongsToMany('App\Goal');
     }
 
 /*    public function details(){

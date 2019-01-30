@@ -1,5 +1,5 @@
 <!--
-  Generated template for the GoalsPage page.
+  Generated template for the AddGoalPostPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,14 +7,18 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Mis Metas</ion-title>
+    <ion-title>Metas en Post</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-	<ion-list inset *ngFor="let goal of userGoals">
+	<div class="Question" *ngIf="postData">
+		<span>¿Para qué <strong>Metas</strong> enfocas este post?</span><br>
+		<strong>{{ postData.title }}</strong>
+	</div>
+	<ion-list inset *ngFor="let goal of postGoals">
 		<ion-item>
 			{{ goal.description }}
 		</ion-item>
@@ -29,5 +33,6 @@
 		  </ion-select>
 		</ion-item>
 		<button ion-button block (click)="addGoal()">Agregar</button>
+		<button ion-button block (click)="goToHomePage()">Listo</button>
 	</ion-list>
 </ion-content>

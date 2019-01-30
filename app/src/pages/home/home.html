@@ -18,7 +18,7 @@
             <p>{{ post.created_at }}</p>
           </ion-item>
           <ion-item>
-              <h2 class="post-title">{{post.title}}</h2>
+              <p class="post-title">{{post.title}}</p><br>
               <span class="post-category" *ngIf="post.categories[0]">→{{ post.categories[0].name }}</span>
               <img *ngIf="post.media[0]" src="{{URL_SERVER}}assets/uploads/{{post.media[0].name}}">
           </ion-item>

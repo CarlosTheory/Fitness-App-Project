@@ -128,7 +128,7 @@ export class HomePage {
   checkGoals(){
     let alertGoals = this.alertCtrl.create({
       title:"¡Hola!",  
-      message: "Hemos notado que aun no has establecido metas, esto es importante para crear un <strong>feed</strong> personalizado para ti. Puedes hacerlo ahora o luego ;)",
+      message: "Hemos notado que aun no has establecido <strong>Metas</strong>, esto es importante para crear un <strong>feed</strong> personalizado para ti. Puedes hacerlo ahora o luego ;)",
       buttons: [
         {
           text: 'Más tarde...',

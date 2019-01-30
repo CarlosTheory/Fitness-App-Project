@@ -15,6 +15,7 @@ import { UserDetailsPage } from '../pages/user-details/user-details';
 import { PostPage} from '../pages/post/post';
 import { ProfilePage } from '../pages/profile/profile';
 import { GoalsPage } from '../pages/goals/goals';
+import { AddGoalPostPage } from '../pages/add-goal-post/add-goal-post';
 
 import { AuthLoginProvider } from '../providers/auth-login/auth-login';
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\MediaPost;
+use App\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
@@ -16,7 +17,13 @@ class PostController extends Controller
         $posts = Post::orderBy('id','desc')->with(['user', 'categories', 'media'])->get();
         //$posts = Post::with(['user', 'categories', 'media'])->orderBy({})
         return $posts;
+    }
 
+    public function getUserPosts(Request $request){
+        $user_id = $request->input("user_id");
+        $posts = User::find($user_id)->posts()->get();
+
+        return $posts;
     }
 
     public function show($id){

@@ -26,6 +26,7 @@ Route::post('update/{user_id}', 'UserController@update');
 Route::post('cat/new', 'CategoryController@register');	
 Route::get('posts', 'PostController@index');
 Route::post('post/{user_id}/create/{category_id}', 'PostController@create');
+Route::post('user/posts', 'PostController@getUserPosts');
 
 //Nope
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -33,8 +34,13 @@ Route::post('post/{user_id}/create/{category_id}', 'PostController@create');
 // });
 
 //Goals
-Route::get('{user_id}/goal', 'UserGoalController@getGoals');
-Route::post('add/goal', 'UserGoalController@addGoal');
+Route::get('goals', 'GoalController@getIndex');
+Route::get('{user_id}/goal', 'GoalController@getUserGoals');
+Route::get('{post_id}/goalpost', 'GoalController@getGoalsPost');
+Route::get('{goal_id}/postgoal', 'GoalController@getPostGoals');
+Route::post('add/goal', 'GoalController@addGoal');
+Route::post('add/usergoal', 'GoalController@addUserGoal');
+Route::post('add/postgoal', 'GoalController@addPostGoal');
 
 //Categories
 Route::get('categories', 'CategoryController@index');
