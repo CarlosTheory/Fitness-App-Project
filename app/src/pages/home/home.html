@@ -15,7 +15,7 @@
             <div class="profile-pic-box" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+post.user.avatar+')'}">
             </div>
             <h2>{{ post.user.name+" "+post.user.last_name }}</h2>
-            <p>{{ post.created_at }}</p>
+            <p>{{ post.created_at | date }}</p>
           </ion-item>
           <ion-item>
               <p class="post-title">{{post.title}}</p><br>
@@ -25,7 +25,7 @@
           
         
           <ion-card-content>
-            <p>{{ post.body }}</p>
+            <p>{{ post.body | words : 30 : '...' }}</p>
           </ion-card-content>
         
           <!-- <ion-row>

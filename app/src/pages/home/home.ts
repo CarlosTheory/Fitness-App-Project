@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController, Events, AlertController } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ElementRef, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { TruncateModule } from '@yellowspot/ng-truncate';
 
 import { GoalsPage } from '../goals/goals';
 //Provider
@@ -59,8 +60,8 @@ export interface Posts {
   templateUrl: 'home.html'
 })
 
-
 export class HomePage {
+
 
   public posts: any;
   public URL_SERVER;
@@ -162,4 +163,5 @@ export class HomePage {
       console.log(err);
     });
   }
+
 }

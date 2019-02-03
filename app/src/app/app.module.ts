@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
-
+import { TruncateModule } from '@yellowspot/ng-truncate';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -48,6 +48,7 @@ import { File } from '@ionic-native/file';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     IonicStorageModule.forRoot(),
+    TruncateModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
