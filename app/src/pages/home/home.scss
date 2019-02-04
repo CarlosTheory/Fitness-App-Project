@@ -19,4 +19,14 @@ page-home {
     	float: left;
     	margin-right: 10px; 
     }
+
+    .category-selector {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .title-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+    }
 }

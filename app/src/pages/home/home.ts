@@ -16,6 +16,7 @@ export interface User {
   last_name: string,
   email: string,
   country: string,
+  username:string,
 }
 
 export interface Data{
@@ -81,11 +82,11 @@ export class HomePage {
     });
     this.menuCtrl.enable(true,"mainMenu");
     this.URL_SERVER = this.authCtrl.URL_SERVER;
-    this.getPosts();
+    this.getAllPosts();
     //this.confirmTokenExists("hola");
 
     events.subscribe('posts:reload', ()=>{
-      this.getPosts();
+      this.getAllPosts();
     });
   }
 
@@ -97,7 +98,7 @@ export class HomePage {
     this.events.publish('app:component', app);      
   }*/
 
-  getPosts(){
+  getAllPosts(){
     let path = 'api/posts';
     this.http.get(this.URL_SERVER+path).subscribe(data => {
       this.posts = data;

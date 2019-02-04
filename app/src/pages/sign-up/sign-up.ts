@@ -39,6 +39,7 @@ export class SignUpPage {
   	"address" : "",
   	"birthday" : "",
   	"gender" : "",
+    "username": "",
   };
 
   //private URL_SERVER = "http://127.0.0.1:8000/"; 
@@ -113,6 +114,18 @@ export class SignUpPage {
       }],
     });
 
+    let alertNull = this.alertCtrl.create({
+      title: 'Ha ocurrido un error',
+      subTitle: 'Recuerde llenar todos los campos con (*) ya que son obligatorios',
+      buttons: [{
+        text: 'Aceptar',
+        role: 'cancel',
+        handler:()=>{
+          console.log("campo nulo");
+        },
+      }],
+    });
+
     let loading = this.loadingCtrl.create();
     loading.present();
     const httpOptions = {
@@ -129,12 +142,26 @@ export class SignUpPage {
     this.dataSelected.city = this.dataSelected.city.replace(/\n/ig, '');
     this.dataSelected.province = this.dataSelected.province.replace(/\n/ig, '');
 
-    if(this.dataSelected.password === this.dataSelected.password_validate){
-      return this.http.post(this.URL_SERVER+pathSign, this.dataSelected, httpOptions)
-      .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error :" + JSON.stringify(err)); alertError.present(); loading.dismiss()});
-    } else {
+    if(this.dataSelected.password !== this.dataSelected.password_validate){
       alertPassword.present();
       loading.dismiss();
+    } else if (this.dataSelected.name === "" ||
+               this.dataSelected.last_name === "" ||
+               this.dataSelected.email === "" ||
+               this.dataSelected.username === "" ||
+               this.dataSelected.province === "" ||
+               this.dataSelected.city === "" ||
+               this.dataSelected.address === "" ||
+               this.dataSelected.zip_code === "" ||
+               this.dataSelected.gender === "" ||
+               this.dataSelected.birthday === ""){
+
+      alertNull.present();
+      loading.dismiss();
+
+    } else {
+      return this.http.post(this.URL_SERVER+pathSign, this.dataSelected, httpOptions)
+      .subscribe(res => {console.log(res); loading.dismiss(); alertSuccess.present()}, err => {console.log("Error :" + JSON.stringify(err)); alertError.present(); loading.dismiss()});
     }
 
   	

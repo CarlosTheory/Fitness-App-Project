@@ -20,7 +20,7 @@
           <ion-item>
             <div class="profile-pic-box" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+postData.user.avatar+')'}">
             </div>
-            <h2>{{ postData.user.name+" "+postData.user.last_name }}</h2>
+            <h2>{{ postData.user.username }}</h2>
             <p>{{ postData.created_at | date }}</p>
           </ion-item>
           <ion-item>

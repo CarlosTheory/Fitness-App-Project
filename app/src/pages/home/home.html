@@ -1,10 +1,20 @@
 <ion-header>
-  <ion-navbar hideBackButton="true" color="orange">
+  <ion-toolbar hideBackButton="true" color="orange">
+        <ion-title class="title-toolbar">Inicio</ion-title>
+        <ion-select class="category-selector">
+          <ion-option  value="4">AR</ion-option>
+          <ion-option  value="2">BN</ion-option>
+          <ion-option  value="3">EN</ion-option>
+        </ion-select>   
+    <ion-buttons start>
+      <button ion-button icon-only color="royal">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Inicio</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
@@ -14,7 +24,7 @@
           <ion-item>
             <div class="profile-pic-box" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+post.user.avatar+')'}">
             </div>
-            <h2>{{ post.user.name+" "+post.user.last_name }}</h2>
+            <h2>{{ post.user.username }}</h2>
             <p>{{ post.created_at | date }}</p>
           </ion-item>
           <ion-item>
