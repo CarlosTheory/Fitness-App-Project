@@ -26,8 +26,8 @@ class PostController extends Controller
         return $posts;
     }
 
-    public function show($id){
-    	return Post::find($id);
+    public function showSinglePost($id){
+    	return Post::with(['user', 'categories', 'media'])->get()->find($id);
     }
 
     public function create(Request $request, $user_id, $category_id){

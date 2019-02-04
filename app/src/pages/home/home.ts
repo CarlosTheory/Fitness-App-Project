@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { TruncateModule } from '@yellowspot/ng-truncate';
 
 import { GoalsPage } from '../goals/goals';
+import { PostSinglePage } from '../post-single/post-single';
 //Provider
 import { AuthLoginProvider } from '../../providers/auth-login/auth-login';
 
@@ -163,5 +164,10 @@ export class HomePage {
       console.log(err);
     });
   }
+
+  viewSinglePost(id){
+    this.navCtrl.push(PostSinglePage, {id:id});
+  }
+
 
 }

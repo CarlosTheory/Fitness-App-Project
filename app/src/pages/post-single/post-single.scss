@@ -1,0 +1,22 @@
+page-post-single {
+	.has-header{
+        margin-top: 50px;
+    }
+      
+    .post-title{
+        font-weight: bold;
+    }
+    .post-category{
+        font-style: italic;
+    }
+
+    .profile-pic-box {
+        background-size: cover;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        box-sizing: border-box;
+    	float: left;
+    	margin-right: 10px; 
+    }
+}

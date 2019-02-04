@@ -112,7 +112,7 @@ export class GoalsPage {
   }
 
   checkGoals(){
-
+    console.log('Chequeando si el usuario tiene metas...');
     //console.log(this.userId);
     let path = "api/"+this.userId+"/goal";
 

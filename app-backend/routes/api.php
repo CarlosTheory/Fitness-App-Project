@@ -27,6 +27,7 @@ Route::post('cat/new', 'CategoryController@register');
 Route::get('posts', 'PostController@index');
 Route::post('post/{user_id}/create/{category_id}', 'PostController@create');
 Route::post('user/posts', 'PostController@getUserPosts');
+Route::get('post/{id}', 'PostController@showSinglePost');
 
 //Nope
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
