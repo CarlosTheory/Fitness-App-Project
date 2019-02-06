@@ -26,6 +26,7 @@ export class SignUpPage {
   public provinces: any;
   public cities:any;
   public dataSelected = {
+    "username": "",
   	"name" : "",
   	"last_name" : "",
   	"email" : "",
@@ -39,7 +40,6 @@ export class SignUpPage {
   	"address" : "",
   	"birthday" : "",
   	"gender" : "",
-    "username": "",
   };
 
   //private URL_SERVER = "http://127.0.0.1:8000/"; 

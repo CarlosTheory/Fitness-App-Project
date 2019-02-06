@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function index(){
 
-        $posts = Post::orderBy('id','desc')->with(['user', 'categories', 'media'])->get();
+        $posts = Post::orderBy('id','desc')->with(['user', 'categories', 'media', 'goals'])->get();
         //$posts = Post::with(['user', 'categories', 'media'])->orderBy({})
         return $posts;
     }

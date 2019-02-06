@@ -16,6 +16,7 @@ import { PostPage } from '../pages/post/post';
 import { GoalsPage } from '../pages/goals/goals';
 import { AddGoalPostPage } from '../pages/add-goal-post/add-goal-post';
 import { PostSinglePage } from '../pages/post-single/post-single';
+import { SearchCategoriesPage } from '../pages/search-categories/search-categories';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -41,7 +42,8 @@ import { File } from '@ionic-native/file';
     PostPage,
     GoalsPage,
     AddGoalPostPage,
-    PostSinglePage
+    PostSinglePage,
+    SearchCategoriesPage
     
   ],
   imports: [
@@ -65,7 +67,8 @@ import { File } from '@ionic-native/file';
     PostPage,
     GoalsPage,
     AddGoalPostPage,
-    PostSinglePage
+    PostSinglePage,
+    SearchCategoriesPage
   ],
   providers: [
     StatusBar,

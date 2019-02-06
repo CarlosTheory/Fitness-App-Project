@@ -14,7 +14,7 @@ class Category extends Model
     	'active' = 1,
     ]; */
 
-    public function post_category(){
+    public function posts(){
     	return $this->belongsToMany('App\Post');
     }
 }

@@ -5,7 +5,7 @@ import { AddGoalPostPage } from '../add-goal-post/add-goal-post';
 
 
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild, ElementRef } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
@@ -196,5 +196,6 @@ export class PostPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostPage');
   }
+
 
 }

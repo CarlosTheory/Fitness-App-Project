@@ -7,6 +7,7 @@ import { TruncateModule } from '@yellowspot/ng-truncate';
 
 import { GoalsPage } from '../goals/goals';
 import { PostSinglePage } from '../post-single/post-single';
+import { SearchCategoriesPage } from '../search-categories/search-categories';
 //Provider
 import { AuthLoginProvider } from '../../providers/auth-login/auth-login';
 
@@ -168,6 +169,10 @@ export class HomePage {
 
   viewSinglePost(id){
     this.navCtrl.push(PostSinglePage, {id:id});
+  }
+
+  goToSearchCategories(){
+    this.navCtrl.push(SearchCategoriesPage);
   }
 
 

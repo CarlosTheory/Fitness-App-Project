@@ -1,0 +1,69 @@
+<!--
+  Generated template for the SearchCategoriesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="orange">
+    <ion-title>Buscar</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<!-- Segmentos -->
+<div padding>
+  <ion-segment [(ngModel)]="search">
+    <ion-segment-button value="usuarios">
+      Usuarios
+    </ion-segment-button>
+    <ion-segment-button value="categorias" (tap)="getCategories()">
+      Categorias
+    </ion-segment-button>
+    <ion-segment-button value="metas" (tap)="getGoals()">
+      Metas
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div [ngSwitch]="search">
+
+  <ion-list *ngSwitchCase="'usuarios'">
+	<ion-searchbar [(ngModel)]="inputSearch" (ionInput)="getSearchInput($event)"></ion-searchbar>
+	<!-- <ion-list *ngIf="inputSearch != '' "> -->
+	<ion-list *ngIf="inputSearch != ''">
+	  <ion-item *ngFor="let user of userData">
+	    {{ user.name + " " + user.last_name}}<br>
+	    <strong>{{ user.username }}</strong>
+	  </ion-item>
+	</ion-list>
+
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'categorias'">
+
+	<ion-list>
+	  <ion-item *ngFor="let category of categoriesAll">
+	    <strong>{{ category.name }}</strong><br>
+	    <p>{{ category.description }}</p>
+	  </ion-item>
+	</ion-list>
+
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'metas'">
+
+  	<ion-list>
+	  <ion-item *ngFor="let goal of goalsAll">
+	    <strong>{{ goal.description }}</strong><br>
+	  </ion-item>
+	</ion-list>
+
+  </ion-list>
+</div>
+<!-- End Segmentos -->
+
+</ion-content>

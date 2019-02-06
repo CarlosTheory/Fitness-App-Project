@@ -52,7 +52,7 @@ export class MyApp {
 
   rootPage: any = HomePage;
   token: string;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
   profile: Array<{title: string, component: any}>;
   
   public URL_SERVER;
@@ -82,13 +82,13 @@ export class MyApp {
     ];*/
 
     this.pages = [
-      { title: 'Home', component: ()=>{this.nav.push(HomePage)} },
-      { title: 'Mis Datos', component: ()=>{this.nav.push(ProfilePage)} },
-      { title:'Mis Metas', component: ()=>{this.nav.push(GoalsPage)} },
-      { title:'Crear Post', component: ()=>{this.nav.push(PostPage)} },
+      { title: 'Home', component: ()=>{this.nav.push(HomePage)}, icon:'home' },
+      { title: 'Mis Datos', component: ()=>{this.nav.push(ProfilePage)}, icon:'list-box'},
+      { title:'Mis Metas', component: ()=>{this.nav.push(GoalsPage)}, icon:'medal' },
+      { title:'Crear Post', component: ()=>{this.nav.push(PostPage)}, icon:'document' },
       { title: 'Cerrar Sesión', component: ()=>{let loading = this.loadingCtrl.create();
                                                 loading.present()
-                                                this.authCtrl.removeToken();this.checkToken();loading.dismiss();} 
+                                                this.authCtrl.removeToken();this.checkToken();loading.dismiss();}, icon:'exit' 
                                                },
     ];
 

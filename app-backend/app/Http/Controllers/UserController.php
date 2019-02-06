@@ -37,6 +37,7 @@ class UserController extends Controller
 
     public function register(Request $request){
     	$rules = [
+          'username' => 'required',
           'name' => 'required',
           'last_name' => 'required',
           'email' => 'required',
@@ -56,6 +57,7 @@ class UserController extends Controller
         $this->validate($request, $rules, $customMessage);
 
         try{
+          $username = $request->input('username');
           $name = $request->input('name');
           $last_name = $request->input('last_name');
           $email = $request->input('email');
@@ -76,6 +78,7 @@ class UserController extends Controller
             Storage::disk('public')->put($picture->getFilename().'.'.$extension,  File::get($picture));
 
             $user = user::create([
+            'username' => $username,
             'name' => $name,
             'last_name' => $last_name,
             'email' => $email,
@@ -92,6 +95,7 @@ class UserController extends Controller
           ]);
           } else {
             $user = user::create([
+            'username' => $username,  
             'name' => $name,
             'last_name' => $last_name,
             'email' => $email,
@@ -126,6 +130,7 @@ class UserController extends Controller
 
     public function details(){
       $user = Auth::user();
+      $goals = $user->goals;
       return response()->json(['user' => $user, 200]);
     }
 
