@@ -52,3 +52,6 @@ Route::get('categories', 'CategoryController@index');
 Route::get('posts/{id}', 'PostController@show'); 
 Route::put('posts/{id}', 'PostController@update');
 Route::delete('posts/{id}', 'PostController@delete');
+
+//Comments
+Route::post('add/comment', 'PostCommentController@addComment');

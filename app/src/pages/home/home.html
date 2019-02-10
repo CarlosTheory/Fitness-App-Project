@@ -13,46 +13,137 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="posts">
-      <ion-card *ngFor="let post of posts">
-
-          <ion-item>
-            <div class="profile-pic-box" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+post.user.avatar+')'}">
-            </div>
-            <h2>{{ post.user.username }}</h2>
-            <p>{{ post.created_at | date }}</p>
-          </ion-item>
-          <ion-item>
-              <p class="post-title">{{post.title}}</p><br>
-              <span class="post-category" *ngIf="post.categories[0]">→{{ post.categories[0].name }}</span>
-              <img *ngIf="post.media[0]" src="{{URL_SERVER}}assets/uploads/{{post.media[0].name}}">
-          </ion-item>
-          
-        
-          <ion-card-content>
-            <p>{{ post.body | words : 30 : '...' }}<strong (click)="viewSinglePost(post.id)"> Leer más</strong></p>
-          </ion-card-content>
-        
-          <!-- <ion-row>
-            <ion-col>
-              <button ion-button icon-start clear small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>12 Likes</div>
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-start clear small>
-                <ion-icon name="text"></ion-icon>
-                <div>4 Comments</div>
-              </button>
-            </ion-col>
-            <ion-col center text-center>
-              <ion-note>
-                11h ago
-              </ion-note>
-            </ion-col>
-          </ion-row> -->
-        
-        </ion-card>
+  <div padding>
+    <ion-segment [(ngModel)]="homePosts">
+      <ion-segment-button value="Posts">
+        Todas las Entradas
+      </ion-segment-button>
+      <ion-segment-button value="Metas">
+        Metas
+      </ion-segment-button>
+    </ion-segment>
   </div>
+
+<div [ngSwitch]="homePosts">
+
+  <div *ngSwitchCase="'Posts'">
+        <div *ngIf="posts" >
+        <ion-card *ngFor="let post of posts">
+
+            <ion-item>
+              <div class="profile-pic-box" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+post.user.avatar+')'}">
+              </div>
+              <h2>{{ post.user.username }}</h2>
+              <p>{{ post.created_at | date }}</p>
+            </ion-item>
+            <ion-item>
+                <p class="post-title">{{post.title}}</p><br>
+                <span class="post-category" *ngIf="post.categories[0]">→{{ post.categories[0].name }}</span>
+                <img *ngIf="post.media[0]" src="{{URL_SERVER}}assets/uploads/{{post.media[0].name}}">
+            </ion-item>
+            
+          
+            <ion-card-content>
+              <p>{{ post.body | words : 30 : '...' }}<strong (click)="viewSinglePost(post.id)"> Leer más</strong></p>
+            </ion-card-content>
+          
+            <!-- <ion-row>
+              <ion-col>
+                <button ion-button icon-start clear small>
+                  <ion-icon name="thumbs-up"></ion-icon>
+                  <div>12 Likes</div>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-start clear small>
+                  <ion-icon name="text"></ion-icon>
+                  <div>4 Comments</div>
+                </button>
+              </ion-col>
+              <ion-col center text-center>
+                <ion-note>
+                  11h ago
+                </ion-note>
+              </ion-col>
+            </ion-row> -->
+          
+          </ion-card>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'Metas'">
+    <div *ngIf="userGoals" >
+      <div *ngFor="let entrada of userGoals">
+          <ion-card *ngFor="let post of entrada.posts | orderBy: id">
+
+            <ion-item>
+              <div class="profile-pic-box" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+post.user.avatar+')'}">
+              </div>
+              <h2>{{ post.user.username }}</h2>
+              <p>{{ post.created_at | date }}</p>
+            </ion-item>
+            <ion-item>
+                <p class="post-title">{{post.title}}</p><br>
+                <span class="post-category" *ngFor="let goal of post.goals">→{{goal.description}}<br></span>
+                <img *ngIf="post.media[0]" src="{{URL_SERVER}}assets/uploads/{{post.media[0].name}}">
+            </ion-item>
+            
+          
+            <ion-card-content>
+              <p>{{ post.body | words : 30 : '...' }}<strong (click)="viewSinglePost(post.id)"> Leer más</strong></p>
+            </ion-card-content>
+          
+          </ion-card>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!--   <ion-list *ngSwitchCase="'Metas'">
+    <div *ngIf="posts" >
+        <ion-card *ngFor="let post of posts">
+
+            <ion-item>
+              <div class="profile-pic-box" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+post.user.avatar+')'}">
+              </div>
+              <h2>{{ post.user.username }}</h2>
+              <p>{{ post.created_at | date }}</p>
+            </ion-item>
+            <ion-item>
+                <p class="post-title">{{post.title}}</p><br>
+                <span class="post-category" *ngIf="post.categories[0]">→{{ post.categories[0].name }}</span>
+                <img *ngIf="post.media[0]" src="{{URL_SERVER}}assets/uploads/{{post.media[0].name}}">
+            </ion-item>
+            
+          
+            <ion-card-content>
+              <p>{{ post.body | words : 30 : '...' }}<strong (click)="viewSinglePost(post.id)"> Leer más</strong></p>
+            </ion-card-content> -->
+          
+            <!-- <ion-row>
+              <ion-col>
+                <button ion-button icon-start clear small>
+                  <ion-icon name="thumbs-up"></ion-icon>
+                  <div>12 Likes</div>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-start clear small>
+                  <ion-icon name="text"></ion-icon>
+                  <div>4 Comments</div>
+                </button>
+              </ion-col>
+              <ion-col center text-center>
+                <ion-note>
+                  11h ago
+                </ion-note>
+              </ion-col>
+            </ion-row> -->
+          
+<!--           </ion-card>
+    </div>
+  </ion-list> -->
+
 </ion-content>

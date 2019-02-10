@@ -36,6 +36,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Goal');
     }
 
+    public function comments(){
+        return $this->hasMany('App\PostComment');
+    }
+
 /*    public function details(){
         return $this->em
     }*/

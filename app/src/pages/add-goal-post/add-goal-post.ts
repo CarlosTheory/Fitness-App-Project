@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -48,7 +48,7 @@ export class AddGoalPostPage {
   public postGoals;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient,
-  	public authCtrl: AuthLoginProvider, public storage: Storage) {
+  	public authCtrl: AuthLoginProvider, public storage: Storage, public events: Events) {
 
   	this.storage.get('token').then(token => {
   		return this.getUserDetails(token);
@@ -181,6 +181,7 @@ export class AddGoalPostPage {
   }
 
   goToHomePage(){
+    this.events.publish('posts:reload');
   	this.navCtrl.push(HomePage);
   }
 

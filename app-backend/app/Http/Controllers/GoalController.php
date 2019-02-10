@@ -16,7 +16,7 @@ class GoalController extends Controller
 		}
 
     public function getUserGoals($user_id){
-    	$goals = User::find($user_id)->goals()->orderBy('name')->get();
+    	$goals = User::find($user_id)->goals()->with(['posts.user', 'posts.media', 'posts.goals'])->orderBy('id', 'desc')->get();
     	//$goals = Goal::where('user_id', $user_id)->with('users')->get();
     	if(sizeof($goals) == 0){
     	 	return response()->json(['No tiene metas registradas.']);
@@ -121,6 +121,10 @@ class GoalController extends Controller
 
         return response($response, 500);
       }
+
+    }
+
+    public function getAllUserPostsByGoals(){
 
     }
 }

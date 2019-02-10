@@ -31,4 +31,8 @@ class Post extends Model
     public function goals(){
         return $this->belongsToMany('App\Goal');
     }
+
+    public function comments(){
+        return $this->hasMany('App\PostComment');
+    }
 }

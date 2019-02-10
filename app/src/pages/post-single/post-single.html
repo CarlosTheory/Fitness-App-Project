@@ -33,27 +33,23 @@
           <ion-card-content>
             <p>{{ postData.body}}</p>
           </ion-card-content>
-        
-          <!-- <ion-row>
+          <ion-row>
             <ion-col>
-              <button ion-button icon-start clear small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>12 Likes</div>
-              </button>
+              <ion-icon class="comments-icon" name="chatbubbles"></ion-icon>{{ " "+numberOfComments+" "+numberOfCommentsString }} 
             </ion-col>
-            <ion-col>
-              <button ion-button icon-start clear small>
-                <ion-icon name="text"></ion-icon>
-                <div>4 Comments</div>
-              </button>
-            </ion-col>
-            <ion-col center text-center>
-              <ion-note>
-                11h ago
-              </ion-note>
-            </ion-col>
-          </ion-row> -->
-        
+          </ion-row>
         </ion-card>
-  </div>
+
+                <ion-list *ngFor="let comment of postData.comments">
+                      <ion-row>
+                        <ion-col col-2>
+                          <div class="profile-pic-box-comment" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+comment.user.avatar +')'}">
+                           </div>
+                        </ion-col>
+                        <ion-col col-10>
+                          <p>{{ comment.body }}</p>
+                        </ion-col>
+                      </ion-row>
+                  </ion-list>
+    </div>
 </ion-content>

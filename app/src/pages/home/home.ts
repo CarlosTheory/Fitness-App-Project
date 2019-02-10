@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, ElementRef, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { TruncateModule } from '@yellowspot/ng-truncate';
+import { OrderModule } from 'ngx-order-pipe';
 
 import { GoalsPage } from '../goals/goals';
 import { PostSinglePage } from '../post-single/post-single';
@@ -18,6 +19,7 @@ export interface User {
   email: string,
   country: string,
   username:string,
+  goals: UserGoals,
 }
 
 export interface Data{
@@ -53,7 +55,25 @@ export interface Posts {
   },
   media:{
     [key: string]: Media
-  }
+  },
+  goals:[
+    {[key: string]: UserGoals}
+  ],
+
+
+}
+
+export interface UserGoals{
+  id:number,
+  name:string,
+  description: string,
+  active:number,
+  pivot: Goals,
+}
+
+export interface Goals {
+  user_id:number,
+  goal_id:number,
 
 }
 
@@ -66,11 +86,18 @@ export interface Posts {
 export class HomePage {
 
 
-  public posts: any;
+  public posts;
   public URL_SERVER;
   public userDetails: Data;
   public userGoals;
   public userId:number;
+  public homePosts:string = "Posts";
+
+  public goalsFeed;
+  public goalsFeedUser = [];
+  public numberOfComments;
+  public numberOfCommentsString:string = "Comentario";
+
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
     public authCtrl: AuthLoginProvider,
@@ -78,9 +105,11 @@ export class HomePage {
     public storage: Storage,
     public events: Events,
     public alertCtrl: AlertController) {
+   
     this.storage.get('token').then(value => {
       return this.getUserDetails(value);
     });
+
     this.menuCtrl.enable(true,"mainMenu");
     this.URL_SERVER = this.authCtrl.URL_SERVER;
     this.getAllPosts();
@@ -101,12 +130,23 @@ export class HomePage {
 
   getAllPosts(){
     let path = 'api/posts';
-    this.http.get(this.URL_SERVER+path).subscribe(data => {
+    this.http.get(this.URL_SERVER+path).subscribe(data  => {
       this.posts = data;
-      this.posts.forEach(function (value){
-        //console.log(value);
-        return value;
+      this.posts.forEach(res => {
+        res.goals.forEach(data => {
+          //console.log(data);
+          //this.goalsFeed = data;
+        });
+
+        res.comments.forEach(res => {
+          console.log(res);
+        });
       });
+      // return this.posts;
+      // this.posts.forEach(function (value){
+      //   //console.log(value);
+      //   return value;
+      // });
     });
   }
 
@@ -122,8 +162,10 @@ export class HomePage {
     let path = "api/details";
 
     this.http.post(this.URL_SERVER+path,"",httpOptions).subscribe((res:Data) => {
+      this.userDetails = res;
       this.userId = res.user.id;
-      //console.log(this.userDetails.user.name);
+      // console.log(JSON.stringify(this.userDetails));
+      //console.log(this.userDetails);
       this.checkGoals();
     });
   
@@ -156,15 +198,33 @@ export class HomePage {
 
     this.http.get(this.URL_SERVER+path).subscribe(data => {
       this.userGoals = data;
+      //console.log(this.userGoals);
       this.userGoals.forEach(value => {
         //console.log(value);
+
         if(value === "No tiene metas registradas."){
           alertGoals.present();
+        } else {
+          this.homePosts = 'Metas';
+          value.posts.forEach(posts => {
+              console.log(posts.title);
+            posts.goals.forEach(goal => {
+              // console.log(goal)
+            });
+
+          });
+
         }
+
       });
+
     }, err => {
       console.log(err);
     });
+  }
+
+  getAllPostsAndCompareGoals(){
+    console.log(this.goalsFeed);
   }
 
   viewSinglePost(id){
@@ -174,6 +234,21 @@ export class HomePage {
   goToSearchCategories(){
     this.navCtrl.push(SearchCategoriesPage);
   }
+
+  // getUserCustomFeedWithGoals(){
+  //   let path = 'api/'+this.userId+'/goal';
+
+  //   let httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type' : 'application/json',
+  //       'Accept':'application/json',
+  //     }),
+  //   };
+
+  //   this.http.get(this.URL_SERVER+path, httpOptions).subscribe(data => {
+  //     console.log(data);
+  //   });
+  // }
 
 
 }

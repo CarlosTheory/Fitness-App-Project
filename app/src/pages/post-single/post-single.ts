@@ -14,7 +14,7 @@ import { AuthLoginProvider } from '../../providers/auth-login/auth-login';
  */
 
 export interface Category{
-  ['categories'],
+  ['categories'];
 } 
 
 export interface Post {
@@ -22,7 +22,22 @@ export interface Post {
   title:string,
   body:string,
   categories: Category,
+  comments:Comments,
   created_at: string,
+}
+
+export interface Comments{
+  ['comments']:Comment;
+}
+
+export interface Comment{
+  body:string,
+  user: User,
+}
+
+export interface User{
+  username:string,
+  avatar:string,
 }
 
 @IonicPage()
@@ -33,8 +48,10 @@ export interface Post {
 export class PostSinglePage {
   public postId = 0;
   public URL_SERVER;
-
+  public numberOfComments:any = "No hay ";
   public postData: Post;
+
+  public numberOfCommentsString:string = "Comentario";
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public authCtrl: AuthLoginProvider,
   	public http: HttpClient) {
   	console.log('Post Single Page');
@@ -62,8 +79,18 @@ export class PostSinglePage {
 
   	this.http.get(this.URL_SERVER+path, httpOptiones).subscribe((res: Post) => {
   		this.postData = res;
-  		console.log(this.postData);
-  		return this.postData;
+      for(let i in this.postData.comments){
+        this.numberOfComments = (i.length+1);
+        console.log("Numero de comentarios:"+this.numberOfComments);
+
+        if(this.numberOfComments > 1){
+          this.numberOfCommentsString = "Comentarios";
+        } else if(this.numberOfComments === 0){
+          this.numberOfCommentsString = "No hay comentarios";
+        }
+
+      }
+
   	});
   }
 

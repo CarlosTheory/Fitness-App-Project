@@ -7,6 +7,7 @@ use App\Post;
 use App\Category;
 use App\MediaPost;
 use App\User;
+use App\PostComment;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
@@ -14,7 +15,7 @@ class PostController extends Controller
 {
     public function index(){
 
-        $posts = Post::orderBy('id','desc')->with(['user', 'categories', 'media', 'goals'])->get();
+        $posts = Post::orderBy('id','desc')->with(['user', 'categories', 'media', 'goals', 'comments.user'])->get();
         //$posts = Post::with(['user', 'categories', 'media'])->orderBy({})
         return $posts;
     }
@@ -27,7 +28,7 @@ class PostController extends Controller
     }
 
     public function showSinglePost($id){
-    	return Post::with(['user', 'categories', 'media'])->get()->find($id);
+    	return Post::with(['user', 'categories', 'media', 'comments.user'])->get()->find($id);
     }
 
     public function create(Request $request, $user_id, $category_id){

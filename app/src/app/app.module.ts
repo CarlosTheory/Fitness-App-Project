@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TruncateModule } from '@yellowspot/ng-truncate';
+import { OrderModule } from 'ngx-order-pipe';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -53,6 +54,7 @@ import { File } from '@ionic-native/file';
     HttpClientModule,
     IonicStorageModule.forRoot(),
     TruncateModule,
+    OrderModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
