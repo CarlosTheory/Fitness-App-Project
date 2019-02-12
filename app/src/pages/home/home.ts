@@ -60,7 +60,18 @@ export interface Posts {
     {[key: string]: UserGoals}
   ],
 
+  comments: Comments,
 
+
+}
+
+export interface Comments{
+  ['comments']:Comment;
+}
+
+export interface Comment{
+  body:string,
+  user: User,
 }
 
 export interface UserGoals{
@@ -87,6 +98,7 @@ export class HomePage {
 
 
   public posts;
+  // public posts: Posts;
   public URL_SERVER;
   public userDetails: Data;
   public userGoals;
@@ -95,7 +107,7 @@ export class HomePage {
 
   public goalsFeed;
   public goalsFeedUser = [];
-  public numberOfComments;
+  public numberOfComments:any = "No hay ";
   public numberOfCommentsString:string = "Comentario";
 
   constructor(public navCtrl: NavController,
@@ -118,6 +130,11 @@ export class HomePage {
     events.subscribe('posts:reload', ()=>{
       this.getAllPosts();
     });
+
+
+    events.subscribe('postbyGoals:data', () => {
+    this.checkGoals();
+    });
   }
 
   showMenu(){
@@ -132,16 +149,35 @@ export class HomePage {
     let path = 'api/posts';
     this.http.get(this.URL_SERVER+path).subscribe(data  => {
       this.posts = data;
+
+       // console.log(this.posts.comments);
+        
+        // for(let i in this.posts.comments){
+        //   console.log(this.posts.comments);
+        //   this.numberOfComments = (i.length+1);
+        //   console.log("Numero de comentarios:"+this.numberOfComments);
+
+        //   if(this.numberOfComments > 1){
+        //     this.numberOfCommentsString = "Comentarios";
+        //   } else if(this.numberOfComments === 0){
+        //     this.numberOfCommentsString = "No hay comentarios";
+        //   }
+
+        // }
+
       this.posts.forEach(res => {
         res.goals.forEach(data => {
           //console.log(data);
           //this.goalsFeed = data;
         });
 
-        res.comments.forEach(res => {
-          console.log(res);
-        });
+        // res.comments.forEach(res => {
+        //   // console.log(res);
+
+        // });
+
       });
+
       // return this.posts;
       // this.posts.forEach(function (value){
       //   //console.log(value);
@@ -193,7 +229,7 @@ export class HomePage {
       ],
     });
 
-    console.log(this.userId);
+    //console.log(this.userId);
     let path = "api/"+this.userId+"/goal";
 
     this.http.get(this.URL_SERVER+path).subscribe(data => {
@@ -207,7 +243,7 @@ export class HomePage {
         } else {
           this.homePosts = 'Metas';
           value.posts.forEach(posts => {
-              console.log(posts.title);
+              //console.log(posts.title);
             posts.goals.forEach(goal => {
               // console.log(goal)
             });
@@ -224,7 +260,7 @@ export class HomePage {
   }
 
   getAllPostsAndCompareGoals(){
-    console.log(this.goalsFeed);
+    //console.log(this.goalsFeed);
   }
 
   viewSinglePost(id){

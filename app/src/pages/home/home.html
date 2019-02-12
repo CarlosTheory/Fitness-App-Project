@@ -47,25 +47,11 @@
               <p>{{ post.body | words : 30 : '...' }}<strong (click)="viewSinglePost(post.id)"> Leer más</strong></p>
             </ion-card-content>
           
-            <!-- <ion-row>
-              <ion-col>
-                <button ion-button icon-start clear small>
-                  <ion-icon name="thumbs-up"></ion-icon>
-                  <div>12 Likes</div>
-                </button>
-              </ion-col>
-              <ion-col>
-                <button ion-button icon-start clear small>
-                  <ion-icon name="text"></ion-icon>
-                  <div>4 Comments</div>
-                </button>
-              </ion-col>
-              <ion-col center text-center>
-                <ion-note>
-                  11h ago
-                </ion-note>
-              </ion-col>
-            </ion-row> -->
+          <ion-row>
+            <ion-col>
+              <ion-icon class="comments-icon" name="chatbubbles"></ion-icon>{{" "+post.comments.length}}
+            </ion-col>
+          </ion-row>
           
           </ion-card>
     </div>
@@ -74,6 +60,7 @@
   <div *ngSwitchCase="'Metas'">
     <div *ngIf="userGoals" >
       <div *ngFor="let entrada of userGoals">
+        <div *ngIf="userGoals == 'No tiene metas registradas.' "> <p>No tiene metas registradas. Para obtener un feed personalido vaya a "Mis Metas" en el menú, e indique las que quiera.</p></div>
           <ion-card *ngFor="let post of entrada.posts | orderBy: id">
 
             <ion-item>
@@ -92,7 +79,13 @@
             <ion-card-content>
               <p>{{ post.body | words : 30 : '...' }}<strong (click)="viewSinglePost(post.id)"> Leer más</strong></p>
             </ion-card-content>
-          
+            
+            <ion-row>
+              <ion-col>
+                <ion-icon class="comments-icon" name="chatbubbles"></ion-icon>{{" "+(post.comments).length}}
+              </ion-col>
+            </ion-row>
+
           </ion-card>
       </div>
 

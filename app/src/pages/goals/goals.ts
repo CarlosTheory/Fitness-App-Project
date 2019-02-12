@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController,  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events  } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -34,7 +34,7 @@ export class GoalsPage {
 	public userGoals;
 	public allGoals;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public auth: AuthLoginProvider, public alertCtrl: AlertController,
-  	public storage: Storage) {
+  	public storage: Storage, public events: Events) {
   	this.URL_SERVER = this.auth.URL_SERVER
 
   	this.storage.get('token').then(value => {
@@ -90,6 +90,7 @@ export class GoalsPage {
   		console.log(res);
   		this.getAllGoals();
   		this.checkGoals();
+      this.events.publish('postbyGoals:data');
   	});
   }
 

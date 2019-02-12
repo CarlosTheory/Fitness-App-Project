@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content #content padding>
 	  <div *ngIf="postData">
       <ion-card>
 
@@ -38,15 +38,22 @@
               <ion-icon class="comments-icon" name="chatbubbles"></ion-icon>{{ " "+numberOfComments+" "+numberOfCommentsString }} 
             </ion-col>
           </ion-row>
+
+            <ion-textarea maxLength="500" placeholder="Escribe aqui..." [(ngModel)]="userComment"></ion-textarea>
+            <ion-item>
+              <button ion-button item-end (click)="addComment()">Enviar</button>
+            </ion-item>
+
         </ion-card>
 
-                <ion-list *ngFor="let comment of postData.comments">
+                <ion-list #Comments *ngFor="let comment of postData.comments">
                       <ion-row>
                         <ion-col col-2>
                           <div class="profile-pic-box-comment" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+comment.user.avatar +')'}">
                            </div>
                         </ion-col>
-                        <ion-col col-10>
+                        <ion-col #Comment col-10>
+                          <div><strong>{{ comment.user.username }}</strong> {{ comment.created_at | date }}</div>
                           <p>{{ comment.body }}</p>
                         </ion-col>
                       </ion-row>
