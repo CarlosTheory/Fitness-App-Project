@@ -8,6 +8,11 @@
 
   <ion-navbar color="orange">
     <ion-title>Posts por Categoria</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (tap)="reloadPosts()">
+       <ion-icon name="refresh-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

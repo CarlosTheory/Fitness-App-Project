@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OrderModule } from 'ngx-order-pipe';
@@ -28,7 +28,7 @@ public posts:any;
 public noData: string = "No hay entradas en esta categoria.";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient,
-  	public authCtrl:AuthLoginProvider) {
+  	public authCtrl:AuthLoginProvider, public loadingCtrl: LoadingController) {
   	this.categoryId = this.navParams.get('category_id');
   	this.URL_SERVER = this.authCtrl.URL_SERVER;
 
@@ -68,6 +68,15 @@ public noData: string = "No hay entradas en esta categoria.";
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CategoryPostPage');
+  }
+
+
+  reloadPosts(){
+    let load = this.loadingCtrl.create();
+
+    load.present();
+    this.getPostsByCategory()
+    load.dismiss();
   }
 
 }

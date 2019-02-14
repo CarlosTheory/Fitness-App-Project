@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController, Events, AlertController } from 'ionic-angular';
+import { NavController, MenuController, Events, AlertController, LoadingController } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, ElementRef, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
@@ -116,7 +116,8 @@ export class HomePage {
     public http: HttpClient,
     public storage: Storage,
     public events: Events,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
    
     this.storage.get('token').then(value => {
       return this.getUserDetails(value);
@@ -286,5 +287,12 @@ export class HomePage {
   //   });
   // }
 
+  reloadPosts(){
+    let load = this.loadingCtrl.create();
+
+    load.present();
+    this.getAllPosts();
+    load.dismiss();
+  }
 
 }
