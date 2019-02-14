@@ -12,7 +12,7 @@ class CategoryController extends Controller
             'name' => 'required',
         ];
 
-        $customMessage = ['required' => 'Por favor coloque el nombre de la categoria'];
+        $customMessage = ['required' => 'Por favor coloque el nombre de la categoria :attribute'];
 
         try{
             $name = $request->input('name');
@@ -39,5 +39,9 @@ class CategoryController extends Controller
     public function index(){
         $categories = Category::orderBy('name','asc')->get();
         return $categories;
+    }
+
+    public function postsByCategory($category_id){
+        return $category = Category::orderBy('id','desc')->with(['posts','posts.user','posts.media', 'posts.comments','posts.categories'])->get()->find($category_id);
     }
 }

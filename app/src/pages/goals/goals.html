@@ -14,10 +14,18 @@
 
 
 <ion-content padding>
-	<ion-list inset *ngFor="let goal of userGoals">
-		<ion-item>
-			{{ goal.description }}
-		</ion-item>
+	<ion-list inset *ngFor="let goal of userGoals | orderBy: id">
+		<ion-row>
+			<ion-col col-10>
+				<div>
+					{{ goal.description }}	
+				</div>
+				
+			</ion-col>
+			<ion-col col-2>
+				<button ion-button color="danger" small (click)="removeGoal(goal.id)"><ion-icon name="remove-circle"></ion-icon></button>
+			</ion-col>
+		</ion-row>
 	</ion-list>
 	<ion-list>
 		<ion-item *ngIf="allGoals">

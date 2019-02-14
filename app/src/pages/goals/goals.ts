@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Events  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events, LoadingController  } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { OrderModule } from 'ngx-order-pipe';
 
 import { AuthLoginProvider } from '../../providers/auth-login/auth-login';
 
@@ -34,7 +35,7 @@ export class GoalsPage {
 	public userGoals;
 	public allGoals;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public auth: AuthLoginProvider, public alertCtrl: AlertController,
-  	public storage: Storage, public events: Events) {
+  	public storage: Storage, public events: Events, public loadingCtrl: LoadingController) {
   	this.URL_SERVER = this.auth.URL_SERVER
 
   	this.storage.get('token').then(value => {
@@ -71,8 +72,10 @@ export class GoalsPage {
   }
 
   addGoal(){
-  	console.log(this.userId);
-  	console.log(this.goalId);
+    let loading = this.loadingCtrl.create();
+
+  	//console.log(this.userId);
+  	//console.log(this.goalId);
   	let path = "api/add/usergoal";
   	let httpOptions = {
   		headers:new HttpHeaders({
@@ -86,11 +89,13 @@ export class GoalsPage {
   		"goal_id": this.goalId,
   	};
 
+    loading.present();
   	this.http.post(this.URL_SERVER+path, request, httpOptions).subscribe(res => {
   		console.log(res);
   		this.getAllGoals();
   		this.checkGoals();
       this.events.publish('postbyGoals:data');
+      loading.dismiss();
   	});
   }
 
@@ -113,20 +118,53 @@ export class GoalsPage {
   }
 
   checkGoals(){
+    let load = this.loadingCtrl.create();
+
     console.log('Chequeando si el usuario tiene metas...');
     //console.log(this.userId);
     let path = "api/"+this.userId+"/goal";
 
+    load.present();
     this.http.get(this.URL_SERVER+path).subscribe(data => {
       this.userGoals = data;
       this.userGoals.forEach(value => {
         console.log(value.name);
       });
-
+      load.dismiss();
       return this.userGoals;
     }, err => {
       console.log(err);
     });
+  }
+
+  removeGoal(goal_id){
+    //console.log("goal:"+goal_id+"<br>"+"user:"+this.userId);
+
+    let loading = this.loadingCtrl.create();
+    let path="api/remove/userGoal";
+    let headers={
+      headers: new HttpHeaders({
+        "Content-Type":"application/json",
+        "Accept":"application/json",
+      }),
+    };
+
+    let request = {
+      "goal_id":goal_id,
+      "user_id":this.userId,
+    };
+
+    loading.present();
+    this.http.post(this.URL_SERVER+path, request, headers).subscribe(res => {
+      console.log(res);
+
+
+      this.getAllGoals();
+      this.checkGoals();
+      this.events.publish('postbyGoals:data');
+      loading.dismiss();
+    });
+
   }
 
 }

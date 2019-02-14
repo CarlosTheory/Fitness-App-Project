@@ -159,4 +159,19 @@ class UserController extends Controller
 
     	return $user;
     }
+
+    public function removeUserGoal(Request $request){
+      try {
+        $user_id = $request->input('user_id');
+        $goal_id = $request->input('goal_id');
+
+        $user = User::find($user_id)->goals()->detach($goal_id);
+
+        return response(['Meta removida'=>true], 201); 
+
+      }catch(Illuminate\Database\QueryException $err){
+        return response(['Meta NO removida'=>false], 500); 
+      }
+      
+    }
 }

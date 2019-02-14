@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 //Users
+Route::post('remove/userGoal', 'UserController@removeUserGoal');
 Route::get('get/users', 'UserController@index');
 Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
@@ -46,6 +47,7 @@ Route::post('add/postgoal', 'GoalController@addPostGoal');
 
 //Categories
 Route::get('categories', 'CategoryController@index');
+Route::get('category/{post_id}', 'CategoryController@postsByCategory');
 
 
 //Posts
@@ -55,3 +57,6 @@ Route::delete('posts/{id}', 'PostController@delete');
 
 //Comments
 Route::post('add/comment', 'PostCommentController@addComment');
+
+//Bookmarks
+Route::post('add/bookmark', 'BookmarkController@addBookmark');

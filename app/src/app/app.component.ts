@@ -16,6 +16,7 @@ import { PostPage} from '../pages/post/post';
 import { ProfilePage } from '../pages/profile/profile';
 import { GoalsPage } from '../pages/goals/goals';
 import { AddGoalPostPage } from '../pages/add-goal-post/add-goal-post';
+import { AboutPage } from'../pages/about/about';
 
 import { AuthLoginProvider } from '../providers/auth-login/auth-login';
 
@@ -138,6 +139,10 @@ export class MyApp {
 
   goToProfile(){
     this.nav.push(ProfilePage);
+  }
+
+  goToAboutPage(){
+    this.nav.push(AboutPage);
   }
 
   initializeApp() {

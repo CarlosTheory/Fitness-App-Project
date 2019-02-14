@@ -34,12 +34,12 @@
               <div class="profile-pic-box" [ngStyle]="{'background-image':'url('+URL_SERVER+'assets/uploads/'+post.user.avatar+')'}">
               </div>
               <h2>{{ post.user.username }}</h2>
-              <p>{{ post.created_at | date }}</p>
+              <p (click)="viewSinglePost(post.id)">{{ post.created_at | date }}</p>
             </ion-item>
             <ion-item>
-                <p class="post-title">{{post.title}}</p><br>
+                <p (click)="viewSinglePost(post.id)" class="post-title">{{post.title}}</p><br>
                 <span class="post-category" *ngIf="post.categories[0]">→{{ post.categories[0].name }}</span>
-                <img *ngIf="post.media[0]" src="{{URL_SERVER}}assets/uploads/{{post.media[0].name}}">
+                <img *ngIf="post.media[0]" src="{{URL_SERVER}}assets/uploads/{{post.media[0].name}}" (click)="viewSinglePost(post.id)">
             </ion-item>
             
           

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="orange">
-    <ion-title>Buscar</ion-title>
+    <ion-title>Filtrar</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,9 +23,9 @@
     <ion-segment-button value="categorias" (tap)="getCategories()">
       Categorias
     </ion-segment-button>
-    <ion-segment-button value="metas" (tap)="getGoals()">
+<!--     <ion-segment-button value="metas" (tap)="getGoals()">
       Metas
-    </ion-segment-button>
+    </ion-segment-button> -->
   </ion-segment>
 </div>
 
@@ -47,8 +47,8 @@
 
 	<ion-list>
 	  <ion-item *ngFor="let category of categoriesAll">
-	    <strong>{{ category.name }}</strong><br>
-	    <p>{{ category.description }}</p>
+	    <strong (click)="passCategory(category.id)">{{ category.name }}</strong><br>
+	    <p (click)="passCategory(category.id)">{{ category.description }}</p>
 	  </ion-item>
 	</ion-list>
 

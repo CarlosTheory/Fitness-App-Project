@@ -18,6 +18,8 @@ import { GoalsPage } from '../pages/goals/goals';
 import { AddGoalPostPage } from '../pages/add-goal-post/add-goal-post';
 import { PostSinglePage } from '../pages/post-single/post-single';
 import { SearchCategoriesPage } from '../pages/search-categories/search-categories';
+import { CategoryPostPage } from '../pages/category-post/category-post';
+import { AboutPage } from '../pages/about/about';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,6 +31,8 @@ import { AuthLoginProvider } from '../providers/auth-login/auth-login';
 import { Camera } from '@ionic-native/camera';
 import { FileTransfer} from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +48,9 @@ import { File } from '@ionic-native/file';
     GoalsPage,
     AddGoalPostPage,
     PostSinglePage,
-    SearchCategoriesPage
+    SearchCategoriesPage,
+    CategoryPostPage,
+    AboutPage
     
   ],
   imports: [
@@ -70,7 +76,9 @@ import { File } from '@ionic-native/file';
     GoalsPage,
     AddGoalPostPage,
     PostSinglePage,
-    SearchCategoriesPage
+    SearchCategoriesPage,
+    CategoryPostPage,
+    AboutPage
   ],
   providers: [
     StatusBar,
@@ -81,6 +89,7 @@ import { File } from '@ionic-native/file';
     AuthLoginProvider,
     File,
     FileTransfer,
+    InAppBrowser
   ]
 })
 export class AppModule {}

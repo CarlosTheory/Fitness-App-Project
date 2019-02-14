@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
-import { IonicPage, NavController, NavParams, Events, AlertController, Scroll } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, AlertController, Scroll, LoadingController } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 //import { HomePage } from '../home/home'; 
@@ -57,12 +57,12 @@ export class PostSinglePage {
   public URL_SERVER;
   public numberOfComments:any = "No hay ";
   public postData: Post;
-
+  public load:any;
   public userComment:string = "";
 
   public numberOfCommentsString:string = "Comentarios";
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public authCtrl: AuthLoginProvider,
-  	public http: HttpClient, private storage: Storage, public alertCtrl: AlertController) {
+  	public http: HttpClient, private storage: Storage, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
   	console.log('Post Single Page');
 
     this.storage.get('token').then(data => {
@@ -98,6 +98,8 @@ export class PostSinglePage {
   }
 
   getPost(){
+    let loading = this.loadingCtrl.create();
+
   	let path = 'api/post/'+this.postId;
 
   	let httpOptiones = {
@@ -107,10 +109,12 @@ export class PostSinglePage {
   		}),
   	};
 
+    loading.present();
   	this.http.get(this.URL_SERVER+path, httpOptiones).subscribe((res: Post) => {
   		this.postData = res;
       // console.log((<any>this.postData.comments).length);
       this.numberOfComments = (<any>this.postData.comments).length
+      loading.dismiss();
 
   	});
   }
@@ -118,15 +122,22 @@ export class PostSinglePage {
   @ViewChild("content") comentario: any;
 
   scrollToComment():void{
+      
     if(this.comentario._scroll){
       this.userComment = "";
+      this.reloadPosts();
+      this.comentario.scrollToBottom(0);}
 
-      this.getPost();
-      this.events.publish("posts:reload");
-      this.comentario.scrollToBottom(0);} 
+      this.load.dismiss();
+
+  }
+
+  reloadPosts(){
+    this.events.publish("posts:reload");
   }
 
   addComment(){
+    this.load = this.loadingCtrl.create();
     let path = "api/add/comment";
     let headers = {
       headers: new HttpHeaders({
@@ -149,8 +160,10 @@ export class PostSinglePage {
 
     if(this.userComment.length > 0){
 
+      this.load.present();
       this.http.post(this.URL_SERVER+path, body, headers).subscribe(data => {
         console.log("Comentario agregado");
+         this.getPost();
       }, err => {
         console.log(JSON.stringify(err));
       });

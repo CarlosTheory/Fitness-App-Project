@@ -40,6 +40,11 @@ class User extends Authenticatable
         return $this->hasMany('App\PostComment');
     }
 
+    public function bookmarks(){
+        return $this->hasMany('App\Bookmark');
+    }
+
+
 /*    public function details(){
         return $this->em
     }*/

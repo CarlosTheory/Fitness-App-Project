@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { AuthLoginProvider } from '../../providers/auth-login/auth-login';
+
+import { CategoryPostPage } from '../category-post/category-post';
 /**
  * Generated class for the SearchCategoriesPage page.
  *
@@ -43,6 +45,7 @@ export class SearchCategoriesPage {
 	public categoriesAll: Category[] = []
 	public goalsAll: Goal[] = [];
 
+  public categoryId = {};
 	public inputSearch: string = "";
   constructor(public navCtrl: NavController, public navParams: NavParams, public authCtrl: AuthLoginProvider,
   	public http: HttpClient) {
@@ -117,6 +120,11 @@ export class SearchCategoriesPage {
   		});
   	}
 
+  }
+
+  passCategory(id){
+    this.navCtrl.push(CategoryPostPage, {category_id:id});
+    // console.log(id);
   }
 
 }

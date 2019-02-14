@@ -88,7 +88,7 @@ export class LoginPage {
       //window.location.reload();
       this.navCtrl.push(HomePage);
       },err =>{
-        console.log('Error', err); loading.dismiss(); alertError.present();
+        console.log('Error', JSON.stringify(err)); loading.dismiss(); alertError.present();
       });
   }
 

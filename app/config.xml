@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <name>10 Fit</name>
+    <description>Consejos de salud y bienestar fisico.</description>
+    <author email="apontec83@gmail.com" href="http://ionicframework.com/">Carlos Aponte</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -83,5 +83,6 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^3.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <allow-navigation href="http://192.168.1.100:8100" sessionid="dee3ee53" />
-    <engine name="android" spec="~7.1.4" />
+    <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
+    <engine name="android" spec="7.1.4" />
 </widget>
